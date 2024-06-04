@@ -2271,3 +2271,18 @@ button,
     border-top: 0;
     margin-top: 0;
     padding-top: 0; }
+
+
+.two-column {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px; /* Adjust the gap as needed */
+}
+
+    .two-column .image {
+        flex: 1;
+    }
+
+    .two-column .content {
+        flex: 1;
+    }
