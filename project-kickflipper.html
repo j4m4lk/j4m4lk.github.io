@@ -1,0 +1,638 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Project KickFlipper – Progress & Optimization</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<style>
+
+        /* Before/After progress section */
+        .progress-pairs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .progress-card {
+            background: #222;
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .progress-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            border-bottom: 1px solid #333;
+            background: #1f1f1f;
+        }
+
+        .badge {
+            font-size: .8rem;
+            padding: 2px 8px;
+            border-radius: 999px;
+            border: 1px solid #444;
+            color: #bbb;
+        }
+
+        .progress-card a {
+            display: block;
+        }
+
+        .progress-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .progress-body {
+            padding: 10px 12px;
+            color: #bbb;
+            font-size: .95rem;
+        }
+
+            .progress-body p {
+                margin: 0;
+                line-height: 1.5;
+            }
+
+        /* Before/After Compare Slider */
+        .ba-compare {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            /* Optional fixed ratio. Remove if you want images to dictate height */
+            aspect-ratio: 16 / 9;
+        }
+
+            .ba-compare img {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                user-select: none;
+                pointer-events: none;
+            }
+
+        /* Before sits behind */
+        .ba-before {
+            z-index: 1;
+        }
+
+        /* After is clipped by the wrapper width */
+        .ba-after-wrap {
+            position: absolute;
+            inset: 0;
+            width: 50%; /* default midpoint */
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .ba-after {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Divider line + handle */
+        .ba-divider {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            border-left: 2px solid #00ffd5;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .ba-handle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 32px;
+            height: 32px;
+            border-radius: 999px;
+            border: 2px solid #00ffd5;
+            background: #1f1f1f;
+            box-shadow: 0 4px 16px rgba(0,0,0,.4);
+            z-index: 4;
+            cursor: ew-resize;
+        }
+
+            /* Make the handle keyboard-focusable */
+            .ba-handle:focus {
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(0,255,213,.35);
+            }
+
+        .ba-caption {
+            color: #000000;
+            font-weight: 700;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-top: 10px;
+            text-shadow: 0 1px 0 rgba(0,0,0,.35); /* gentle lift on dark bg */
+        }
+
+
+		/* Page-local tweaks (safe with the theme) */
+		.meta {
+			color: #aaa;
+			font-size: 0.9rem;
+			margin-top: -10px;
+		}
+
+		.tags {
+			display: flex;
+			flex-wrap: wrap;
+			gap: .5rem;
+			margin: .5rem 0 1rem;
+		}
+
+		.tag {
+			background: #222;
+			border: 1px solid #333;
+			padding: .2rem .5rem;
+			border-radius: 4px;
+			font-size: .85rem;
+		}
+
+		/* Gallery grid */
+		.gallery {
+			display: grid;
+			grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+			gap: 12px;
+		}
+
+			.gallery figure {
+				margin: 0;
+				background: #222;
+				border-radius: 6px;
+				overflow: hidden;
+				border: 1px solid #333;
+			}
+
+			.gallery img {
+				display: block;
+				width: 100%;
+				height: 180px;
+				object-fit: cover;
+			}
+
+			.gallery figcaption {
+				padding: 8px 10px;
+				font-size: .9rem;
+				color: #bbb;
+			}
+
+		/* Perf table */
+		table.perf td, table.perf th {
+			white-space: nowrap;
+		}
+
+		.good {
+			color: #25d366;
+		}
+
+		.warn {
+			color: #ffcc00;
+		}
+
+		/* Collapsible sections */
+		details {
+			background: #242424;
+			border: 1px solid #333;
+			border-radius: 6px;
+			padding: 12px 14px;
+			margin: 14px 0;
+		}
+
+			details[open] summary {
+				margin-bottom: 8px;
+			}
+
+		summary {
+			cursor: pointer;
+			font-weight: 600;
+			color: #00ffd5;
+		}
+	</style>
+</head>
+<body class="is-preload">
+	<div id="wrapper">
+
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+
+				<!-- Header -->
+				<header id="header">
+					<a href="index.html" class="logo"><strong>Portfolio</strong> by Jamal</a>
+				</header>
+
+				<!-- Banner / Intro -->
+				<section id="banner">
+					<div class="content">
+						<header>
+							<h1>Project KickFlipper</h1>
+							<p>Mobile soccer trickshot game – devlog, screenshots, and optimizations</p>
+						</header>
+						<p class="meta">Status: <strong>In Development</strong> · Engine: <strong>Unity</strong> · Platforms: <strong>Android / iOS</strong></p>
+						<div class="tags">
+							<span class="tag">Unity</span>
+							<span class="tag">Netcode (Authoritative)</span>
+							<span class="tag">Mobile Optimization</span>
+							<span class="tag">Procedural Levels</span>
+						</div>
+						<p>
+							KickFlipper is a fast, score‑chasing trickshot game. Curve the ball, bank off walls for multipliers,
+							and chain targets for big combos. Below I’m tracking how I’m reducing CPU/GPU cost, memory,
+							and draw calls while keeping the feel crispy on mid‑range phones.
+						</p>
+					</div>
+					<span class="image object">
+						<!-- Replace with a key art or logo -->
+						<img src="images/kickflipper/hero.jpg" alt="Project KickFlipper key art">
+					</span>
+				</section>
+
+				<!-- Quick Links -->
+				<section>
+					<header class="major"><h2>Contents</h2></header>
+					<ul>
+						<li><a href="#overview">Overview</a></li>
+						<li><a href="#screenshots">Screenshots</a></li>
+						<li><a href="#optimizations">Optimization Log</a></li>
+						<li><a href="#performance">Performance Benchmarks</a></li>
+						<li><a href="#devlog">Devlog / Changelog</a></li>
+					</ul>
+				</section>
+
+				<!-- Overview -->
+				<section id="overview">
+					<header class="major"><h2>Overview</h2></header>
+					<p>
+						Core loop: aim → kick → hit targets → chase multipliers (bank shots, curve, perfect timing).
+						Levels are bite‑sized (30–90s) and tuned for one‑hand play.
+					</p>
+					<ul>
+						<li>Authoritative setup with Unity Netcode QuickSetup.</li>
+						<li>Deterministic scoring with server validation for combo/multiplier events.</li>
+						<li>Procedural target layouts with difficulty bands and seed sharing.</li>
+						<li>Low‑overhead UI with pooled widgets and batched TMP updates.</li>
+					</ul>
+				</section>
+
+				<!--<section id="progress">
+					<header class="major"><h2>Progress Screenshots</h2></header>
+					<p class="meta">Before and after visuals as the art direction evolved.</p>
+
+					<div class="progress-pairs">-->
+						<!-- BEFORE -->
+						<!--<div class="progress-card">
+							<div class="progress-head">
+								<strong>Before</strong>
+								<span class="badge">Early Art Pass</span>
+							</div>
+							<a href="images/kickflipper/Before1.png" class="lightbox">
+								<img src="images/kickflipper/Before1.png" alt="KickFlipper early art style - before improvements">
+							</a>
+							<div class="progress-body">
+								<p>Original look before the new art direction.</p>
+							</div>
+						</div>-->
+
+						<!-- AFTER -->
+						<!--<div class="progress-card">
+							<div class="progress-head">
+								<strong>After</strong>
+								<span class="badge">Updated Art Style</span>
+							</div>
+							<a href="images/kickflipper/after1.png" class="lightbox">
+								<img src="images/kickflipper/after1.png" alt="KickFlipper updated art style - after improvements">
+							</a>
+							<div class="progress-body">
+								<p>
+									I changed and refined the art style, and sourced better‑fit assets that elevate the game’s
+									feel and overall coherence. The result is a cleaner, punchier look that matches the
+									trickshot vibe and reads clearly on mobile screens.
+								</p>
+							</div>
+						</div>
+					</div>
+				</section>-->
+
+				<section id="progress">
+					<header class="major"><h2>Progress Screenshots</h2></header>
+
+					<div class="ba-compare" aria-label="Before and After comparison: KickFlipper art update">
+						<img class="ba-before" src="images/kickflipper/Before1.png" alt="Before – early art style">
+						<div class="ba-after-wrap">
+							<img class="ba-after" src="images/kickflipper/after1.png" alt="After – updated art style">
+						</div>
+
+						<div class="ba-divider" aria-hidden="true"></div>
+						<!-- The handle is focusable for keyboard control -->
+						<button class="ba-handle" aria-label="Drag to compare before and after" tabindex="0"></button>
+					</div>
+
+					<p class="ba-caption">
+						I updated the art direction by replacing early placeholder assets with low‑poly models,
+						giving the game a cleaner, more distinct visual style that enhances its looks.
+					</p>
+				</section>
+
+
+
+				<!-- Screenshots / Gallery -->
+				<section id="screenshots">
+					<header class="major"><h2>Screenshots</h2></header>
+					<div class="gallery">
+						<!-- Replace src paths with your images -->
+						<figure>
+							<a href="images/kickflipper/shot_01.jpg" class="lightbox">
+								<img src="images/kickflipper/shot_01.jpg" alt="Gameplay target shot">
+							</a>
+							<figcaption>Early gameplay – wall bounce into triple target.</figcaption>
+						</figure>
+
+						<figure>
+							<a href="images/kickflipper/shot_02.jpg" class="lightbox">
+								<img src="images/kickflipper/shot_02.jpg" alt="Score summary">
+							</a>
+							<figcaption>Score breakdown with bounce multiplier.</figcaption>
+						</figure>
+
+						<figure>
+							<a href="images/kickflipper/shot_03.jpg" class="lightbox">
+								<img src="images/kickflipper/shot_03.jpg" alt="Level select">
+							</a>
+							<figcaption>Level select – difficulty bands & seeds.</figcaption>
+						</figure>
+
+						<figure>
+							<a href="images/kickflipper/shot_04.jpg" class="lightbox">
+								<img src="images/kickflipper/shot_04.jpg" alt="Optimization overlay">
+							</a>
+							<figcaption>Optimization overlay – batches & timings.</figcaption>
+						</figure>
+					</div>
+				</section>
+
+				<!-- Optimization Log -->
+				<section id="optimizations">
+					<header class="major"><h2>Optimization Log</h2></header>
+
+					<details open>
+						<summary>Batching & Draw Calls</summary>
+						<p><strong>Goal:</strong> Reduce overdraw + state changes on mid‑tier Android GPUs.</p>
+						<ul>
+							<li>Enabled GPU Instancing for repeat props (+ SRP Batcher).</li>
+							<li>Merged static level pieces (Static Batching) where memory allowed.</li>
+							<li>Trimmed materials from 24 → 9. Unified tiling and roughness maps.</li>
+						</ul>
+						<p><em>Result:</em> Heavy scene draw calls: <strong>~1200 → ~380</strong>.</p>
+					</details>
+
+					<details>
+						<summary>Physics & FixedUpdate Cost</summary>
+						<ul>
+							<li>Moved non‑critical checks to Update using time budget + counters.</li>
+							<li>Pooled colliders for temporary targets to avoid allocations.</li>
+							<li>Reduced solver iterations on mobile profile where safe.</li>
+						</ul>
+						<p><em>Result:</em> FixedUpdate CPU: <strong>‑35–45%</strong> on Pixel 6 / Galaxy A53.</p>
+					</details>
+
+					<details>
+						<summary>UI & TMP</summary>
+						<ul>
+							<li>Pooled TMP objects; disabled auto‑size; batched font atlases.</li>
+							<li>Minimized layout rebuilds; deferred stat updates to 5–10 Hz.</li>
+						</ul>
+						<p><em>Result:</em> Layout + Canvas rebuild spikes eliminated in end‑of‑round screen.</p>
+					</details>
+				</section>
+
+				<!-- Performance -->
+				<section id="performance">
+					<header class="major"><h2>Performance Benchmarks</h2></header>
+					<p class="meta">Devices tested: Pixel 6, Galaxy A53, iPhone 12. Build: IL2CPP, Medium Quality.</p>
+					<div class="table-wrapper">
+						<table class="alt perf">
+							<thead>
+								<tr>
+									<th>Scene</th>
+									<th>Before FPS</th>
+									<th>After FPS</th>
+									<th>Draw Calls</th>
+									<th>CPU ms</th>
+									<th>GPU ms</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Tutorial Arena</td>
+									<td>48–55</td>
+									<td class="good">60</td>
+									<td>650 → 230</td>
+									<td>9.6 → 6.1</td>
+									<td>13.2 → 7.8</td>
+								</tr>
+								<tr>
+									<td>Urban Rooftop</td>
+									<td>42–50</td>
+									<td class="good">58–60</td>
+									<td>1200 → 380</td>
+									<td>12.1 → 7.9</td>
+									<td>16.8 → 9.5</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<p class="warn">Note: Numbers are from in‑game capture mode; device thermals can shift results ±5–10%.</p>
+				</section>
+
+				<!-- Devlog -->
+				<section id="devlog">
+					<header class="major"><h2>Devlog / Changelog</h2></header>
+					<article>
+						<h3>July 31, 2025 – Instancing + SRP Batcher</h3>
+						<p>Unified materials and enabled instancing for repeat geometry. Refactored render queues to reduce overdraw in VFX.</p>
+					</article>
+					<article>
+						<h3>July 24, 2025 – TMP Pool + Deferred UI</h3>
+						<p>Pooled the end‑round panel, stopped auto‑size, and throttled UI refresh to 10 Hz under load.</p>
+					</article>
+					<article>
+						<h3>July 15, 2025 – Physics Budget</h3>
+						<p>Lowered solver iterations on mobile profile; pooled trigger colliders for target spawns.</p>
+					</article>
+				</section>
+
+				<!-- CTA -->
+				<section>
+					<header class="major"><h2>Contact</h2></header>
+					<p>Want the full breakdown or a test build? Reach out—happy to share profiler captures and deep dives.</p>
+					<ul class="actions">
+						<li><a href="mailto:jamal.kundi@gmail.com" class="button primary">Email Me</a></li>
+						<li><a href="index.html" class="button">Back to Portfolio</a></li>
+					</ul>
+				</section>
+
+			</div>
+		</div>
+
+		<!-- Sidebar -->
+		<div id="sidebar">
+			<div class="inner">
+
+				<nav id="menu">
+					<header class="major"><h2>Menu</h2></header>
+					<ul>
+						<li><a href="index.html">Introduction</a></li>
+						<li><a href="generic.html">Professional Projects</a></li>
+						<li><a href="elements.html">University/Side Projects</a></li>
+						<li><a href="project-kickflipper.html">Project KickFlipper</a></li>
+					</ul>
+				</nav>
+
+				<section>
+					<header class="major"><h2>Get in touch</h2></header>
+					<ul class="contact">
+						<li class="icon solid fa-envelope"><a href="#">jamal.kundi@gmail.com</a></li>
+						<li class="icon solid fa-phone">+(44) 7448499436</li>
+						<li class="icon solid fa-home">Belfast, Northern Ireland, United Kingdom.</li>
+					</ul>
+				</section>
+
+				<footer id="footer">
+					<p class="copyright">&copy; Jamal. All rights reserved.</p>
+				</footer>
+
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Scripts (your theme’s) -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+	<!-- Optional: tiny lightbox (no deps) -->
+	<script>
+		// Click any .lightbox to open the full image in a simple overlay
+		(function () {
+			const overlay = document.createElement('div');
+			overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:9999;';
+			const img = document.createElement('img');
+			img.style.cssText = 'max-width:92vw;max-height:92vh;box-shadow:0 10px 40px rgba(0,0,0,.6)';
+			overlay.appendChild(img);
+			overlay.addEventListener('click', () => overlay.style.display = 'none');
+			document.body.appendChild(overlay);
+
+			document.querySelectorAll('a.lightbox').forEach(a => {
+				a.addEventListener('click', e => {
+					e.preventDefault();
+					img.src = a.getAttribute('href');
+					overlay.style.display = 'flex';
+				});
+			});
+		})();
+	</script>
+
+	<script>
+		(function () {
+			function initCompare(el) {
+				const wrap = el.querySelector('.ba-after-wrap');
+				const handle = el.querySelector('.ba-handle');
+				const divide = el.querySelector('.ba-divider');
+
+				// start at 50%
+				setPos(0.5);
+
+				function setPos(t) {
+					t = Math.max(0, Math.min(1, t));
+					wrap.style.width = (t * 100) + '%';
+					divide.style.left = (t * 100) + '%';
+					handle.style.left = (t * 100) + '%';
+					handle.style.top = '50%';
+				}
+
+				function clientX(e) {
+					if (e.touches && e.touches.length) return e.touches[0].clientX;
+					return e.clientX;
+				}
+
+				function onPointer(e) {
+					const rect = el.getBoundingClientRect();
+					const x = (clientX(e) - rect.left) / rect.width;
+					setPos(x);
+				}
+
+				let dragging = false;
+
+				// Mouse
+				el.addEventListener('mousedown', (e) => {
+					dragging = true;
+					onPointer(e);
+				});
+				window.addEventListener('mousemove', (e) => dragging && onPointer(e));
+				window.addEventListener('mouseup', () => dragging = false);
+
+				// Touch
+				el.addEventListener('touchstart', (e) => {
+					dragging = true;
+					onPointer(e);
+				}, { passive: true });
+				window.addEventListener('touchmove', (e) => dragging && onPointer(e), { passive: true });
+				window.addEventListener('touchend', () => dragging = false);
+
+				// Click jumps to position
+				el.addEventListener('click', onPointer);
+
+				// Keyboard (focus the handle, then use arrow keys)
+				handle.addEventListener('keydown', (e) => {
+					const stepFine = 0.02;
+					const stepCoarse = 0.1;
+					let current = parseFloat(wrap.style.width) / 100 || 0.5;
+
+					switch (e.key) {
+						case 'ArrowLeft': setPos(current - stepFine); e.preventDefault(); break;
+						case 'ArrowRight': setPos(current + stepFine); e.preventDefault(); break;
+						case 'Home': setPos(0); e.preventDefault(); break;
+						case 'End': setPos(1); e.preventDefault(); break;
+						case 'PageDown': setPos(current - stepCoarse); e.preventDefault(); break;
+						case 'PageUp': setPos(current + stepCoarse); e.preventDefault(); break;
+					}
+				});
+
+				// Re-center on resize to keep the handle aligned if layout changes
+				window.addEventListener('resize', () => {
+					const width = parseFloat(wrap.style.width) || 50;
+					setPos(width / 100);
+				});
+			}
+
+			document.querySelectorAll('.ba-compare').forEach(initCompare);
+		})();
+	</script>
+
+</body>
+</html>
