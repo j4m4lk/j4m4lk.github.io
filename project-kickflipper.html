@@ -7,6 +7,45 @@
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<style>
 
+        .code-compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 24px;
+            background: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+            .code-compare pre {
+                background: #111;
+                color: #0f0;
+                padding: 12px;
+                border-radius: 6px;
+                overflow-x: auto;
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+
+            .code-compare h3 {
+                margin-bottom: 8px;
+                font-size: 1rem;
+                color: #00ffd5;
+            }
+
+        .optim-analysis {
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            background: #2a2a2a;
+            border: 1px solid #333;
+            padding: 16px;
+            border-radius: 8px;
+        }
+
+
         /* Before/After progress section */
         .progress-pairs {
             display: grid;
@@ -170,6 +209,34 @@
 			font-size: .85rem;
 		}
 
+        #banner {
+            position: relative; /* This makes child absolute elements stay within this section */
+            overflow: hidden; /* Optional: hides anything going outside */
+        }
+        /* Faded background image behind text, inside the banner */
+        .banner-bg-image {
+            position: absolute;
+            top: 20px;
+            left: 66%;
+            transform: translateX(-10%);
+            width: 95%;
+            max-width: 780px;
+            opacity: 0.6;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+            .banner-bg-image img {
+                width: 100%;
+                height: auto;
+            }
+
+        #banner .content {
+            position: relative;
+            z-index: 1;
+        }
+
+
 		/* Gallery grid */
 		.gallery {
 			display: grid;
@@ -243,59 +310,106 @@
 					<a href="index.html" class="logo"><strong>Portfolio</strong> by Jamal</a>
 				</header>
 
-				<!-- Banner / Intro -->
 				<section id="banner">
 					<div class="content">
 						<header>
 							<h1>Project KickFlipper</h1>
-							<p>Mobile soccer trickshot game – devlog, screenshots, and optimizations</p>
+							<p style="color: #000;">A project I'm currently developing - including devlogs, performance optimizations.</p>
 						</header>
-						<p class="meta">Status: <strong>In Development</strong> · Engine: <strong>Unity</strong> · Platforms: <strong>Android / iOS</strong></p>
+						<p class="meta">Status: <strong>In Development</strong> · Engine: <strong>Unity</strong> · Platforms: <strong>Android </strong></p>
 						<div class="tags">
 							<span class="tag">Unity</span>
-							<!--<span class="tag">Netcode (Authoritative)</span>-->
 							<span class="tag">C#</span>
 							<span class="tag">LOW POLY</span>
 						</div>
-						<p>
-							KickFlipper is a Low-poly 3D, score‑chasing trickshot game. Curve the ball and earn multipliers for big combos. Below are some Screenshots and comparisons on how I’m changing the game and its direction, reducing CPU/GPU cost on Mobile Devices, memory optimizations, 
+						<p style="color: #000;">
+							KickFlipper is a Low-poly 3D, score‑chasing trickshot game. Curve the ball and earn multipliers for big combos. Below are some Screenshots and comparisons on how I’m changing the game and its direction, reducing CPU/GPU cost on Mobile Devices, memory optimizations,
 							and Updates I am making for the game.
 						</p>
 					</div>
-					<span class="image object">
-						<!-- Replace with a key art or logo -->
-						<img src="images/kickflipper/hero.jpg" alt="Project KickFlipper key art">
-					</span>
+
+					<!-- Faded image behind content -->
+					<div class="banner-bg-image">
+						<img src="images/kickflipper/hero.png" alt="Project KickFlipper key art">
+					</div>
 				</section>
+
 
 				<!-- Quick Links -->
 				<!--<section>
-					<header class="major"><h2>Contents</h2></header>
-					<ul>
-						<li><a href="#overview">Overview</a></li>
-						<li><a href="#screenshots">Screenshots</a></li>
-						<li><a href="#optimizations">Optimization Log</a></li>
-						<li><a href="#performance">Performance Benchmarks</a></li>
-						<li><a href="#devlog">Devlog / Changelog</a></li>
-					</ul>
-				</section>-->
-
+		<header class="major"><h2>Contents</h2></header>
+		<ul>
+			<li><a href="#overview">Overview</a></li>
+			<li><a href="#screenshots">Screenshots</a></li>
+			<li><a href="#optimizations">Optimization Log</a></li>
+			<li><a href="#performance">Performance Benchmarks</a></li>
+			<li><a href="#devlog">Devlog / Changelog</a></li>
+		</ul>
+	</section>-->
 				<!-- Overview -->
 				<!--<section id="overview">
-					<header class="major"><h2>Overview</h2></header>
-					<p>
-						Core loop: aim → kick → hit targets → chase multipliers (bank shots, curve, perfect timing).
-						Levels are bite‑sized (30–90s) and tuned for one‑hand play.
-					</p>
-					<ul>
-						<li>Authoritative setup with Unity Netcode QuickSetup.</li>
-						<li>Deterministic scoring with server validation for combo/multiplier events.</li>
-						<li>Procedural target layouts with difficulty bands and seed sharing.</li>
-						<li>Low‑overhead UI with pooled widgets and batched TMP updates.</li>
-					</ul>
-				</section>-->
+		<header class="major"><h2>Overview</h2></header>
+		<p>
+			Core loop: aim → kick → hit targets → chase multipliers (bank shots, curve, perfect timing).
+			Levels are bite‑sized (30–90s) and tuned for one‑hand play.
+		</p>
+		<ul>
+			<li>Authoritative setup with Unity Netcode QuickSetup.</li>
+			<li>Deterministic scoring with server validation for combo/multiplier events.</li>
+			<li>Procedural target layouts with difficulty bands and seed sharing.</li>
+			<li>Low‑overhead UI with pooled widgets and batched TMP updates.</li>
+		</ul>
+	</section>-->
 
-			
+				<section class="code-optim-section">
+					<h2>Rotation Code Optimization – Manual vs DOTween</h2>
+					<p style="color: #000; margin-top: 10px; line-height: 1.6;">
+						This type of rotation animation is used across multiple objects in the game—from
+						player turns to environmental elements and UI transitions. Because it runs frequently
+						and across many instances, optimizing it early was critical for reducing CPU overhead,
+						ensuring consistent frame times, and keeping GC allocations low—especially on mobile.
+					</p>
+
+					<div class="code-compare">
+						<!-- BEFORE -->
+						<div>
+							<h3>Before</h3>
+							<pre><code>Quaternion startRotation = player.transform.rotation;
+Quaternion endRotation = Quaternion.Euler(0, targetYAngle, 0);
+float elapsed = 0f;
+
+while (elapsed &lt; duration)
+{
+    elapsed += Time.deltaTime;
+    player.transform.rotation = Quaternion.Slerp(startRotation, endRotation, elapsed / duration);
+    yield return null;
+}</code></pre>
+						</div>
+
+						<!-- AFTER -->
+						<div>
+							<h3>After (with DOTween)</h3>
+							<pre><code>// we use DOTween for interpolation and easing
+player.transform.DORotate(new Vector3(0, targetYAngle, 0), duration).SetEase(Ease.OutSine);
+yield return player.transform
+    .DORotate(new Vector3(0, targetYAngle, 0), 0)
+    .WaitForCompletion();</code></pre>
+						</div>
+					</div>
+
+					<div class="optim-analysis">
+						<strong style="color: #00ff00;">Why this is better:</strong>
+						<ul>
+							<li><strong style="color: #00ff00;">Reduced lines of code:</strong> From 9 lines to 2—cleaner and easier to maintain.</li>
+							<li><strong style="color: #00ff00;">Improved performance:</strong> DOTween handles interpolation internally using optimized C# coroutines, avoiding extra GC pressure and CPU usage from per-frame math.</li>
+							<li><strong style="color: #00ff00;">Smoother animation:</strong> Built-in easing like <code>Ease.OutSine</code> makes transitions feel natural without manual math.</li>
+							<li><strong style="color: #00ff00;">GC friendly:</strong> No per-frame <code>Quaternion</code> recalculation or struct allocations—DOTween uses pooling and caching behind the scenes.</li>
+						</ul>
+					</div>
+				</section>
+
+
+
 
 				<section id="progress">
 					<header class="major"><h2>Progress Screenshots</h2></header>
@@ -358,95 +472,92 @@
 
 				<!-- Optimization Log -->
 				<!--<section id="optimizations">
-					<header class="major"><h2>Optimization Log</h2></header>
+		<header class="major"><h2>Optimization Log</h2></header>
 
-					<details open>
-						<summary>Batching & Draw Calls</summary>
-						<p><strong>Goal:</strong> Reduce overdraw + state changes on mid‑tier Android GPUs.</p>
-						<ul>
-							<li>Enabled GPU Instancing for repeat props (+ SRP Batcher).</li>
-							<li>Merged static level pieces (Static Batching) where memory allowed.</li>
-							<li>Trimmed materials from 24 → 9. Unified tiling and roughness maps.</li>
-						</ul>
-						<p><em>Result:</em> Heavy scene draw calls: <strong>~1200 → ~380</strong>.</p>
-					</details>
+		<details open>
+			<summary>Batching & Draw Calls</summary>
+			<p><strong>Goal:</strong> Reduce overdraw + state changes on mid‑tier Android GPUs.</p>
+			<ul>
+				<li>Enabled GPU Instancing for repeat props (+ SRP Batcher).</li>
+				<li>Merged static level pieces (Static Batching) where memory allowed.</li>
+				<li>Trimmed materials from 24 → 9. Unified tiling and roughness maps.</li>
+			</ul>
+			<p><em>Result:</em> Heavy scene draw calls: <strong>~1200 → ~380</strong>.</p>
+		</details>
 
-					<details>
-						<summary>Physics & FixedUpdate Cost</summary>
-						<ul>
-							<li>Moved non‑critical checks to Update using time budget + counters.</li>
-							<li>Pooled colliders for temporary targets to avoid allocations.</li>
-							<li>Reduced solver iterations on mobile profile where safe.</li>
-						</ul>
-						<p><em>Result:</em> FixedUpdate CPU: <strong>‑35–45%</strong> on Pixel 6 / Galaxy A53.</p>
-					</details>
+		<details>
+			<summary>Physics & FixedUpdate Cost</summary>
+			<ul>
+				<li>Moved non‑critical checks to Update using time budget + counters.</li>
+				<li>Pooled colliders for temporary targets to avoid allocations.</li>
+				<li>Reduced solver iterations on mobile profile where safe.</li>
+			</ul>
+			<p><em>Result:</em> FixedUpdate CPU: <strong>‑35–45%</strong> on Pixel 6 / Galaxy A53.</p>
+		</details>
 
-					<details>
-						<summary>UI & TMP</summary>
-						<ul>
-							<li>Pooled TMP objects; disabled auto‑size; batched font atlases.</li>
-							<li>Minimized layout rebuilds; deferred stat updates to 5–10 Hz.</li>
-						</ul>
-						<p><em>Result:</em> Layout + Canvas rebuild spikes eliminated in end‑of‑round screen.</p>
-					</details>
-				</section>-->
-
+		<details>
+			<summary>UI & TMP</summary>
+			<ul>
+				<li>Pooled TMP objects; disabled auto‑size; batched font atlases.</li>
+				<li>Minimized layout rebuilds; deferred stat updates to 5–10 Hz.</li>
+			</ul>
+			<p><em>Result:</em> Layout + Canvas rebuild spikes eliminated in end‑of‑round screen.</p>
+		</details>
+	</section>-->
 				<!-- Performance -->
 				<!--<section id="performance">
-					<header class="major"><h2>Performance Benchmarks</h2></header>
-					<p class="meta">Devices tested: Pixel 9XL, PC. Build: IL2CPP, High Quality.</p>
-					<div class="table-wrapper">
-						<table class="alt perf">
-							<thead>
-								<tr>
-									<th>Scene</th>
-									<th>Before FPS</th>
-									<th>After FPS</th>
-									<th>Draw Calls</th>
-									<th>CPU ms</th>
-									<th>GPU ms</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>Tutorial Arena</td>
-									<td>48–55</td>
-									<td class="good">60</td>
-									<td>650 → 230</td>
-									<td>9.6 → 6.1</td>
-									<td>13.2 → 7.8</td>
-								</tr>
-								<tr>
-									<td>Urban Rooftop</td>
-									<td>42–50</td>
-									<td class="good">58–60</td>
-									<td>1200 → 380</td>
-									<td>12.1 → 7.9</td>
-									<td>16.8 → 9.5</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<p class="warn">Note: Numbers are from in‑Engine; device thermals and hardware can shift results ±5–30%.</p>
-				</section>-->
-
+		<header class="major"><h2>Performance Benchmarks</h2></header>
+		<p class="meta">Devices tested: Pixel 9XL, PC. Build: IL2CPP, High Quality.</p>
+		<div class="table-wrapper">
+			<table class="alt perf">
+				<thead>
+					<tr>
+						<th>Scene</th>
+						<th>Before FPS</th>
+						<th>After FPS</th>
+						<th>Draw Calls</th>
+						<th>CPU ms</th>
+						<th>GPU ms</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Tutorial Arena</td>
+						<td>48–55</td>
+						<td class="good">60</td>
+						<td>650 → 230</td>
+						<td>9.6 → 6.1</td>
+						<td>13.2 → 7.8</td>
+					</tr>
+					<tr>
+						<td>Urban Rooftop</td>
+						<td>42–50</td>
+						<td class="good">58–60</td>
+						<td>1200 → 380</td>
+						<td>12.1 → 7.9</td>
+						<td>16.8 → 9.5</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<p class="warn">Note: Numbers are from in‑Engine; device thermals and hardware can shift results ±5–30%.</p>
+	</section>-->
 				<!-- Devlog -->
 				<!--<section id="devlog">
-					<header class="major"><h2>Devlog / Changelog</h2></header>
-					<article>
-						<h3>July 31, 2025 – Instancing + SRP Batcher</h3>
-						<p>Unified materials and enabled instancing for repeat geometry. Refactored render queues to reduce overdraw in VFX.</p>
-					</article>
-					<article>
-						<h3>July 24, 2025 – TMP Pool + Deferred UI</h3>
-						<p>Pooled the end‑round panel, stopped auto‑size, and throttled UI refresh to 10 Hz under load.</p>
-					</article>
-					<article>
-						<h3>July 15, 2025 – Physics Budget</h3>
-						<p>Lowered solver iterations on mobile profile; pooled trigger colliders for target spawns.</p>
-					</article>
-				</section>-->
-
+		<header class="major"><h2>Devlog / Changelog</h2></header>
+		<article>
+			<h3>July 31, 2025 – Instancing + SRP Batcher</h3>
+			<p>Unified materials and enabled instancing for repeat geometry. Refactored render queues to reduce overdraw in VFX.</p>
+		</article>
+		<article>
+			<h3>July 24, 2025 – TMP Pool + Deferred UI</h3>
+			<p>Pooled the end‑round panel, stopped auto‑size, and throttled UI refresh to 10 Hz under load.</p>
+		</article>
+		<article>
+			<h3>July 15, 2025 – Physics Budget</h3>
+			<p>Lowered solver iterations on mobile profile; pooled trigger colliders for target spawns.</p>
+		</article>
+	</section>-->
 				<!-- CTA -->
 				<section>
 					<header class="major"><h2>Contact</h2></header>
