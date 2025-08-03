@@ -253,14 +253,13 @@
 						<p class="meta">Status: <strong>In Development</strong> · Engine: <strong>Unity</strong> · Platforms: <strong>Android / iOS</strong></p>
 						<div class="tags">
 							<span class="tag">Unity</span>
-							<span class="tag">Netcode (Authoritative)</span>
-							<span class="tag">Mobile Optimization</span>
-							<span class="tag">Procedural Levels</span>
+							<!--<span class="tag">Netcode (Authoritative)</span>-->
+							<span class="tag">C#</span>
+							<span class="tag">LOW POLY</span>
 						</div>
 						<p>
-							KickFlipper is a fast, score‑chasing trickshot game. Curve the ball, bank off walls for multipliers,
-							and chain targets for big combos. Below I’m tracking how I’m reducing CPU/GPU cost, memory,
-							and draw calls while keeping the feel crispy on mid‑range phones.
+							KickFlipper is a Low-poly 3D, score‑chasing trickshot game. Curve the ball and earn multipliers for big combos. Below are some Screenshots and comparisons on how I’m changing the game and its direction, reducing CPU/GPU cost on Mobile Devices, memory optimizations, 
+							and Updates I am making for the game.
 						</p>
 					</div>
 					<span class="image object">
@@ -270,7 +269,7 @@
 				</section>
 
 				<!-- Quick Links -->
-				<section>
+				<!--<section>
 					<header class="major"><h2>Contents</h2></header>
 					<ul>
 						<li><a href="#overview">Overview</a></li>
@@ -279,10 +278,10 @@
 						<li><a href="#performance">Performance Benchmarks</a></li>
 						<li><a href="#devlog">Devlog / Changelog</a></li>
 					</ul>
-				</section>
+				</section>-->
 
 				<!-- Overview -->
-				<section id="overview">
+				<!--<section id="overview">
 					<header class="major"><h2>Overview</h2></header>
 					<p>
 						Core loop: aim → kick → hit targets → chase multipliers (bank shots, curve, perfect timing).
@@ -294,46 +293,9 @@
 						<li>Procedural target layouts with difficulty bands and seed sharing.</li>
 						<li>Low‑overhead UI with pooled widgets and batched TMP updates.</li>
 					</ul>
-				</section>
-
-				<!--<section id="progress">
-					<header class="major"><h2>Progress Screenshots</h2></header>
-					<p class="meta">Before and after visuals as the art direction evolved.</p>
-
-					<div class="progress-pairs">-->
-						<!-- BEFORE -->
-						<!--<div class="progress-card">
-							<div class="progress-head">
-								<strong>Before</strong>
-								<span class="badge">Early Art Pass</span>
-							</div>
-							<a href="images/kickflipper/Before1.png" class="lightbox">
-								<img src="images/kickflipper/Before1.png" alt="KickFlipper early art style - before improvements">
-							</a>
-							<div class="progress-body">
-								<p>Original look before the new art direction.</p>
-							</div>
-						</div>-->
-
-						<!-- AFTER -->
-						<!--<div class="progress-card">
-							<div class="progress-head">
-								<strong>After</strong>
-								<span class="badge">Updated Art Style</span>
-							</div>
-							<a href="images/kickflipper/after1.png" class="lightbox">
-								<img src="images/kickflipper/after1.png" alt="KickFlipper updated art style - after improvements">
-							</a>
-							<div class="progress-body">
-								<p>
-									I changed and refined the art style, and sourced better‑fit assets that elevate the game’s
-									feel and overall coherence. The result is a cleaner, punchier look that matches the
-									trickshot vibe and reads clearly on mobile screens.
-								</p>
-							</div>
-						</div>
-					</div>
 				</section>-->
+
+			
 
 				<section id="progress">
 					<header class="major"><h2>Progress Screenshots</h2></header>
@@ -357,43 +319,45 @@
 
 
 
+
+
 				<!-- Screenshots / Gallery -->
 				<section id="screenshots">
 					<header class="major"><h2>Screenshots</h2></header>
 					<div class="gallery">
 						<!-- Replace src paths with your images -->
 						<figure>
-							<a href="images/kickflipper/shot_01.jpg" class="lightbox">
-								<img src="images/kickflipper/shot_01.jpg" alt="Gameplay target shot">
+							<a href="images/kickflipper/scrn1.jpg" class="lightbox">
+								<img src="images/kickflipper/scrn1.jpg" alt="HUB">
 							</a>
-							<figcaption>Early gameplay – wall bounce into triple target.</figcaption>
+							<figcaption>Overworld/Level Selection/Hub.</figcaption>
 						</figure>
 
 						<figure>
-							<a href="images/kickflipper/shot_02.jpg" class="lightbox">
-								<img src="images/kickflipper/shot_02.jpg" alt="Score summary">
+							<a href="images/kickflipper/scrn2.jpg" class="lightbox">
+								<img src="images/kickflipper/scrn2.jpg" alt="Characters">
 							</a>
-							<figcaption>Score breakdown with bounce multiplier.</figcaption>
+							<figcaption>Talking to characters for Missions/Levels.</figcaption>
 						</figure>
 
 						<figure>
-							<a href="images/kickflipper/shot_03.jpg" class="lightbox">
-								<img src="images/kickflipper/shot_03.jpg" alt="Level select">
+							<a href="images/kickflipper/scrn3.png" class="lightbox">
+								<img src="images/kickflipper/scrn3.png" alt="Nighttime">
 							</a>
-							<figcaption>Level select – difficulty bands & seeds.</figcaption>
+							<figcaption>Nighttime Gameplay.</figcaption>
 						</figure>
 
 						<figure>
-							<a href="images/kickflipper/shot_04.jpg" class="lightbox">
-								<img src="images/kickflipper/shot_04.jpg" alt="Optimization overlay">
+							<a href="images/kickflipper/scrn4.jpg" class="lightbox">
+								<img src="images/kickflipper/scrn4.jpg" alt="Mainmenu">
 							</a>
-							<figcaption>Optimization overlay – batches & timings.</figcaption>
+							<figcaption>Menu Selection.</figcaption>
 						</figure>
 					</div>
 				</section>
 
 				<!-- Optimization Log -->
-				<section id="optimizations">
+				<!--<section id="optimizations">
 					<header class="major"><h2>Optimization Log</h2></header>
 
 					<details open>
@@ -425,12 +389,12 @@
 						</ul>
 						<p><em>Result:</em> Layout + Canvas rebuild spikes eliminated in end‑of‑round screen.</p>
 					</details>
-				</section>
+				</section>-->
 
 				<!-- Performance -->
-				<section id="performance">
+				<!--<section id="performance">
 					<header class="major"><h2>Performance Benchmarks</h2></header>
-					<p class="meta">Devices tested: Pixel 6, Galaxy A53, iPhone 12. Build: IL2CPP, Medium Quality.</p>
+					<p class="meta">Devices tested: Pixel 9XL, PC. Build: IL2CPP, High Quality.</p>
 					<div class="table-wrapper">
 						<table class="alt perf">
 							<thead>
@@ -463,11 +427,11 @@
 							</tbody>
 						</table>
 					</div>
-					<p class="warn">Note: Numbers are from in‑game capture mode; device thermals can shift results ±5–10%.</p>
-				</section>
+					<p class="warn">Note: Numbers are from in‑Engine; device thermals and hardware can shift results ±5–30%.</p>
+				</section>-->
 
 				<!-- Devlog -->
-				<section id="devlog">
+				<!--<section id="devlog">
 					<header class="major"><h2>Devlog / Changelog</h2></header>
 					<article>
 						<h3>July 31, 2025 – Instancing + SRP Batcher</h3>
@@ -481,12 +445,12 @@
 						<h3>July 15, 2025 – Physics Budget</h3>
 						<p>Lowered solver iterations on mobile profile; pooled trigger colliders for target spawns.</p>
 					</article>
-				</section>
+				</section>-->
 
 				<!-- CTA -->
 				<section>
 					<header class="major"><h2>Contact</h2></header>
-					<p>Want the full breakdown or a test build? Reach out—happy to share profiler captures and deep dives.</p>
+					<p>Got any Suggestions or queries? Reach out or check out the game on Play Store.</p>
 					<ul class="actions">
 						<li><a href="mailto:jamal.kundi@gmail.com" class="button primary">Email Me</a></li>
 						<li><a href="index.html" class="button">Back to Portfolio</a></li>
