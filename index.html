@@ -1,261 +1,204 @@
 <!DOCTYPE HTML>
-
 <html>
-	<head>
-		<title>Jamal Kundi - Game Developer and Programmer - Portfolio</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body class="is-preload">
+<head>
+	<title>Jamal Kundi - Game Developer and Programmer - Portfolio</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+	<!-- Page-local styles for full-page GIF background (under #main only) -->
+	<style>
 
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
+        /* Reusable dark translucent card for banner content + image */
+        #banner .overlay-card {
+            background: rgba(0,0,0,0.55); /* black, ~55% */
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            padding: 16px 18px;
+            backdrop-filter: blur(2px); /* subtle glass effect (safe to remove) */
+            box-shadow: 0 8px 24px rgba(0,0,0,.35);
+        }
 
-							<!-- Header -->
-								<header id="header">
-									<a href="index.html" class="logo"><strong>Portfolio</strong> by Jamal</a>
-									<!--<ul class="icons">
-										<li><a href="#" class="icon brands fa"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
-									</ul>-->
-								</header>
+            /* Ensure readable text on the dark card */
+            #banner .overlay-card,
+            #banner .overlay-card h1,
+            #banner .overlay-card h2,
+            #banner .overlay-card p,
+            #banner .overlay-card .actions a,
+            #banner .overlay-card .actions .button {
+                color: #fff !important; /* override any inline black text */
+            }
 
-							<!-- Banner -->
-								<section id="banner">
-									<div class="content">
-										<header>
-											<h1>Hi, I’m Jamal Kundi</h1>
-											<p style="color: #000;">Game Developer and Programmer</p>
-										</header>
-										<p style="color: #000;">
-											I have over 5 years of experience in the industry and a Master’s degree in Games Programming from the University of Hull, UK. My academic background gave me a strong foundation in systems like DirectX and OpenGL, while my professional journey has allowed me to develop expertise across both Unreal Engine and Unity. I'm passionate about creating high-performance, innovative games and take pride in being a versatile developer who adapts well to diverse development challenges.
-										</p>
-										<!--<ul class="actions">
-		<li><a href="#" class="button big">Learn More</a></li>
-	</ul>-->
-										<ul class="actions">
-											<li>
-												<a href="project-kickflipper.html" class="button primary">
-													📱 Check out my personal Android project: Project KickFlipper
-												</a>
-											</li>
-										</ul>
+        /* Tweak the image card */
+        #banner .image.overlay-card {
+            display: inline-block; /* shrink to fit image */
+            padding: 10px; /* space around the img */
+        }
 
-									</div>
-									<span class="image object">
-										<img src="images/propic.png" alt="" />
-									</span>
-								</section>
+            #banner .image.overlay-card img {
+                display: block;
+                border-radius: 10px;
+                max-width: 100%;
+                height: auto;
+            }
 
-							<!-- Section -->
-								<!--<section>
-									<header class="major">
-										<h2> Skills </h2>
-									</header>
-									<div class="features">
-										<article>
-											<span class="icon fa-gem"></span>
-											<div class="content">
-												<h3>Portitor ullamcorper</h3>
-												<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											</div>
-										</article>
-										<article>
-											<span class="icon solid fa-paper-plane"></span>
-											<div class="content">
-												<h3>Sapien veroeros</h3>
-												<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											</div>
-										</article>
-										<article>
-											<span class="icon solid fa-rocket"></span>
-											<div class="content">
-												<h3>Quam lorem ipsum</h3>
-												<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											</div>
-										</article>
-										<article>
-											<span class="icon solid fa-signal"></span>
-											<div class="content">
-												<h3>Sed magna finibus</h3>
-												<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											</div>
-										</article>
-									</div>
-								</section>-->
 
-							<!-- Section -->
-								<!--<section>
-									<header class="major">
-										<h2>Ipsum sed dolor</h2>
-									</header>
-									<div class="posts">
-										<article>
-											<a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>
-											<h3>Interdum aenean</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic02.jpg" alt="" /></a>
-											<h3>Nulla amet dolore</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic03.jpg" alt="" /></a>
-											<h3>Tempus ullamcorper</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>
-											<h3>Sed etiam facilis</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic05.jpg" alt="" /></a>
-											<h3>Feugiat lorem aenean</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic06.jpg" alt="" /></a>
-											<h3>Amet varius aliquam</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-									</div>
-								</section>-->
+		:root {
+			/* Tweak if your sidebar width/gap differ in your theme */
+			--sidebar-width: 22rem; /* typical HTML5UP Editorial sidebar width */
+			--sidebar-gap: 2rem; /* space between sidebar and main */
+		}
 
-						</div>
+		/* ===== Fixed background layer (MAIN AREA ONLY) ===== */
+		.site-bg.site-bg--main {
+			position: fixed;
+			top: 0;
+			bottom: 0;
+			left: calc(var(--sidebar-width) + var(--sidebar-gap));
+			right: 0;
+			z-index: 0; /* stays behind everything */
+			pointer-events: none; /* never blocks clicks/scroll */
+		}
+
+			.site-bg.site-bg--main > img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover; /* cover entire visible area */
+				display: block;
+			}
+		/* Dim overlay (~50% visibility) */
+		.site-bg-dim {
+			position: absolute;
+			inset: 0;
+			background: rgba(0,0,0,0.5);
+		}
+
+		/* Make sure site content sits above bg */
+		#wrapper {
+			position: relative;
+			z-index: 1;
+		}
+
+		/* On smaller screens the sidebar stacks; show bg full width */
+		@media (max-width: 980px) {
+			.site-bg.site-bg--main {
+				left: 0;
+			}
+		}
+
+		/* Respect reduced-motion: hide animated bg for those users */
+		@media (prefers-reduced-motion: reduce) {
+			.site-bg {
+				display: none;
+			}
+		}
+	</style>
+</head>
+<body class="is-preload">
+
+	<!-- Fixed GIF background under the MAIN content only -->
+	<div class="site-bg site-bg--main" aria-hidden="true">
+		<img src="BG/BGgiff.gif" alt="Background montage" />
+		<div class="site-bg-dim"></div>
+	</div>
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+
+				<!-- Header -->
+				<header id="header">
+					<a href="index.html" class="logo"><strong>Portfolio</strong> by Jamal</a>
+				</header>
+
+				<!-- Banner -->
+				<section id="banner">
+					<div class="content overlay-card">
+						<header>
+							<h1>Hi, I’m Jamal Kundi</h1>
+							<!-- remove inline black so white shows cleanly -->
+							<p>Game Developer and Programmer</p>
+						</header>
+						<p>
+							I have over 5 years of experience in the industry and a Master’s degree in Games Programming from the University of Hull, UK.
+							My academic background gave me a strong foundation in systems like DirectX and OpenGL, while my professional journey has allowed
+							me to develop expertise across both Unreal Engine and Unity. I'm passionate about creating high-performance, innovative games
+							and take pride in being a versatile developer who adapts well to diverse development challenges.
+						</p>
+
+						<ul class="actions">
+							<li>
+								<a href="project-kickflipper.html" class="button primary">
+									📱 Check out my personal Android project: Project KickFlipper
+								</a>
+							</li>
+						</ul>
 					</div>
 
-				<!-- Sidebar -->
-					<div id="sidebar">
-						<div class="inner">
+					<span class="image object overlay-card">
+						<img src="images/propic.png" alt="Jamal profile" />
+					</span>
+				</section>
 
-							<!-- Search -->
-								<!--<section id="search" class="alt">
-									<form method="post" action="#">
-										<input type="text" name="query" id="query" placeholder="Search" />
-									</form>
-								</section>-->
-
-							<!-- Menu -->
-								<nav id="menu">
-									<header class="major">
-										<h2>Menu</h2>
-									</header>
-									<ul>
-										<li><a href="index.html">Introduction</a></li>
-										<li><a href="generic.html">Professional Projects</a></li>
-										<li><a href="elements.html">University/Side Projects</a></li>
-										<li><a href="project-kickflipper.html">Project KickFlipper</a></li>
-
-
-
-
-										<!--<li>
-		<span class="opener">Submenu</span>
-		<ul>
-			<li><a href="#">Lorem Dolor</a></li>
-			<li><a href="#">Ipsum Adipiscing</a></li>
-			<li><a href="#">Tempus Magna</a></li>
-			<li><a href="#">Feugiat Veroeros</a></li>
-		</ul>
-	</li>
-	<li><a href="#">Etiam Dolore</a></li>
-	<li><a href="#">Adipiscing</a></li>
-	<li>
-		<span class="opener">Another Submenu</span>
-		<ul>
-			<li><a href="#">Lorem Dolor</a></li>
-			<li><a href="#">Ipsum Adipiscing</a></li>
-			<li><a href="#">Tempus Magna</a></li>
-			<li><a href="#">Feugiat Veroeros</a></li>
-		</ul>
-	</li>
-	<li><a href="#">Maximus Erat</a></li>
-	<li><a href="#">Sapien Mauris</a></li>
-	<li><a href="#">Amet Lacinia</a></li>-->
-									</ul>
-								</nav>
-
-							<!-- Section -->
-								<!--<section>
-									<header class="major">
-										<h2>Ante interdum</h2>
-									</header>
-									<div class="mini-posts">
-										<article>
-											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic08.jpg" alt="" /></a>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic09.jpg" alt="" /></a>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
-										</article>
-									</div>
-									<ul class="actions">
-										<li><a href="#" class="button">More</a></li>
-									</ul>
-								</section>-->
-
-							<!-- Section -->
-								<section>
-									<header class="major">
-										<h2>Get in touch</h2>
-									</header>
-									<p> </p>
-									<ul class="contact">
-										<li class="icon solid fa-envelope"><a href="#">jamal.kundi@gmail.com</a></li>
-										<li class="icon solid fa-phone">+(44) 7448499436</li>
-										<li class="icon solid fa-home">Belfast, Northern Ireland, United Kingdom.</li>
-									</ul>
-								</section>
-
-							<!-- Footer -->
-								<footer id="footer">
-									<p class="copyright">&copy; Jamal. All rights reserved.</p>
-								</footer>
-
-						</div>
-					</div>
 
 			</div>
+		</div>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+		<!-- Sidebar -->
+		<div id="sidebar">
+			<div class="inner">
 
-	</body>
+				<nav id="menu">
+					<header class="major">
+						<h2>Menu</h2>
+					</header>
+					<ul>
+						<li><a href="index.html">Introduction</a></li>
+						<li>
+							<a href="project-kickflipper.html">
+								Project Kickflipper <span style="color:#000; font-size: 0.8em;">(Ongoing) Unity Engine C#</span>
+							</a>
+						</li>
+						<li>
+							<a href="project-lunaris.html">
+								Project Lunaris <span style="color:#000; font-size: 0.8em;">(Ongoing) Unreal Engine 5 C++</span>
+							</a>
+						</li>
+						<li><a href="generic.html">Professional Projects</a></li>
+						<li><a href="elements.html">University/Side Projects</a></li>
+					</ul>
+				</nav>
+
+				<section>
+					<header class="major">
+						<h2>Get in touch</h2>
+					</header>
+					<ul class="contact">
+						<li class="icon solid fa-envelope"><a href="mailto:jamal.kundi@gmail.com">jamal.kundi@gmail.com</a></li>
+						<li class="icon solid fa-phone">+(44) 7448499436</li>
+						<li class="icon solid fa-home">Belfast, Northern Ireland, United Kingdom.</li>
+					</ul>
+				</section>
+
+				<!-- Footer -->
+				<footer id="footer">
+					<p class="copyright">&copy; Jamal. All rights reserved.</p>
+				</footer>
+
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
 </html>

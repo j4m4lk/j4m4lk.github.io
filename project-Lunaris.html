@@ -6,7 +6,27 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<style>
+        /* Black BG + green text variant for sections */
+        .code-optim-section.map-green {
+            background: #000; /* pure black */
+            border: 1px solid #222;
+        }
 
+            .code-optim-section.map-green h2,
+            .code-optim-section.map-green h3,
+            .code-optim-section.map-green p,
+            .code-optim-section.map-green li,
+            .code-optim-section.map-green summary,
+            .code-optim-section.map-green strong {
+                color: #00ff00; /* bright green text */
+            }
+
+            /* Code block stays neon on black */
+            .code-optim-section.map-green pre {
+                background: #000;
+                border: 1px solid #222;
+                color: #0f0; /* terminal green */
+            }
         .code-compare {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -313,26 +333,121 @@
 				<section id="banner">
 					<div class="content">
 						<header>
-							<h1>Project KickFlipper</h1>
-							<p style="color: #000;">A project I'm currently developing as a passion project - including devlogs, performance optimizations. The game is set to realease on Steam and android this year.</p>
+							<h1>Project Lunaris</h1>
+							<p style="color: #000;">A project I'm currently developing for Segritude games, Working as a Unreal Engine Programmer, Using Blueprints and C++</p>
 						</header>
-						<p class="meta">Status: <strong>In Development</strong> · Engine: <strong>Unity</strong> · Platforms: <strong>Android </strong></p>
+						<p class="meta">Status: <strong>In Development</strong> · Engine: <strong>Unreal Engine 5.6</strong> · Platforms: <strong>PC </strong></p>
 						<div class="tags">
-							<span class="tag">Unity</span>
-							<span class="tag">C#</span>
-							<span class="tag">LOW POLY</span>
+							<span class="tag">Unreal Engine 5</span>
+							<span class="tag">C++</span>
+							<span class="tag">Survival</span>
 						</div>
-						<p style="color: #000;">
-							KickFlipper is a Low-poly 3D, score‑chasing trickshot game. Curve the ball and earn multipliers for big combos. Below are some Screenshots and comparisons on how I’m changing the game and its direction, reducing CPU/GPU cost on Mobile Devices, memory optimizations,
-							and Updates I am making for the game.
-						</p>
+
+
 					</div>
+
+
 
 					<!-- Faded image behind content -->
 					<div class="banner-bg-image">
-						<img src="images/kickflipper/hero.png" alt="Project KickFlipper key art">
+						<img src="images/Lunaris/intro.png" alt="Project Lunaris key art">
 					</div>
 				</section>
+
+				<p style="color:#000; line-height:1.6;">
+					I’m working as C++ programmer on an Unreal Engine 5 survival RPG inspired by Enshrouded and Valheim. I work across UE5 C++ and Blueprints, owning multiplayer/replication and core gameplay systems (AI, party system, world map & waypoints/compass, interaction, and UI/UX). My focus is a modular, data-driven architecture with safe pointers (TObjectPtr/TWeakObjectPtr), const-correctness, and early-out guards—plus ongoing profiling and optimizations to keep Gameplay smooth and the codebase scalable.
+				</p>
+
+
+				<section class="code-optim-section">
+					<h2>Modular Map & Waypoint System — Component-Driven, Safe & Optimized (UE5)</h2>
+					<p style="color: #000; margin-top: 10px; line-height: 1.6;">
+						The map/compass is fully modular: attach a <code>UMapMarkerComponent</code> to any Actor and it auto-registers on the Map and Compass.
+						Designers can tweak the icon, size, color, and visibility directly in the editor—no hardcoded links. Below is the waypoint add flow,
+						which converts a screen click into a world-space marker and safely spawns it.
+					</p>
+
+					<div class="code-compare">
+						<div>
+							<h3>Waypoint Placement (UI → World)</h3>
+							<pre><code>void UWorldMapUI::AddWaypoint(const FVector2D ScreenPosition) const
+{
+    const UMapSubsystem* MapSubsystem = UMapSubsystem::Get(this);
+    if (!IsValid(MapSubsystem) || MapSubsystem->RegisteredMarkers.Num() >= 3)
+    {
+        LOG_WARN(MapSystemLog, "Cannot add more than 3 waypoints. Remove one first.");
+        return;
+    }
+
+    if (!MapTexture)
+    {
+        LOG_ERROR(MapSystemLog, "MapTexture border is null!");
+        return;
+    }
+
+    const FGeometry Geo = MapTexture->GetCachedGeometry();
+    const FVector2D LocalPt = Geo.AbsoluteToLocal(ScreenPosition);
+
+    const FVector2D Size = Geo.GetLocalSize();
+    if (LocalPt.X &lt; 0 || LocalPt.X &gt; Size.X || LocalPt.Y &lt; 0 || LocalPt.Y &gt; Size.Y)
+        return;
+
+    const ULandSubsystem* LandSubsystem = ULandSubsystem::Get(this);
+    if (!IsValid(LandSubsystem)) return;
+
+    FVector WorldPos = LandSubsystem->TextureToWorld(LocalPt, Size, 0.f);
+    if (UMapSubsystem* MSS = UMapSubsystem::Get(this); IsValid(MSS))
+    {
+        WorldPos = MSS->ProjectToGround(WorldPos, 100000.f, 20.f);
+    }
+
+    if (IsValid(MarkerClass))
+    {
+        FActorSpawnParameters Params;
+        Params.Owner = GetOwningPlayer();
+        if (GetWorld()->SpawnActor&lt;AActor&gt;(MarkerClass, WorldPos, FRotator::ZeroRotator, Params))
+        {
+            LOG_INFO(MapSystemLog, "Spawned Marker at %s", *WorldPos.ToString());
+        }
+        else
+        {
+            LOG_ERROR(MapSystemLog, "Failed to spawn Marker actor!");
+        }
+    }
+}</code></pre>
+						</div>
+					</div>
+
+					<div class="optim-analysis">
+						<strong style="color: #00ff00;">What’s happening here:</strong>
+						<ul>
+							<li><strong style="color: #00ff00;">Subsystem gate & limit:</strong> Fetch <code>UMapSubsystem</code>. If invalid or at the 3-waypoint cap, exit early to keep UI readable and avoid spam.</li>
+							<li><strong style="color: #00ff00;">Screen → widget space:</strong> Use <code>GetCachedGeometry()</code> + <code>AbsoluteToLocal</code> to map the click into the map widget’s local coords, then bounds-check.</li>
+							<li><strong style="color: #00ff00;">Widget → world space:</strong> Delegate to <code>ULandSubsystem::TextureToWorld</code> so UI stays dumb; all terrain/UV mapping logic lives in the land subsystem.</li>
+							<li><strong style="color: #00ff00;">Ground projection:</strong> <code>UMapSubsystem::ProjectToGround</code> snaps to terrain with a bounded trace (depth/step), so markers never float.</li>
+							<li><strong style="color: #00ff00;">Spawn with ownership:</strong> Spawn the configured <code>MarkerClass</code> at the resolved position and set <code>Owner</code> to the local player for clean lifetime/relevance.</li>
+						</ul>
+
+						<strong style="color: #00ff00;">Why this design is solid:</strong>
+						<ul>
+							<li><strong style="color: #00ff00;">Modular & editor-driven:</strong> Any Actor with <code>UMapMarkerComponent</code> auto-registers to Map/Compass. Icon, size, color, and visibility are editable per instance.</li>
+							<li><strong style="color: #00ff00;">Const-correct, early exits:</strong> The UI call is <code>const</code> and cheap; invalid state bails immediately, keeping frame time predictable.</li>
+							<li><strong style="color: #00ff00;">Safe pointers:</strong> Use <code>IsValid(...)</code> checks; store UObjects as <code>TObjectPtr&lt;&gt;</code> in owners, and external actor refs as <code>TWeakObjectPtr&lt;&gt;</code> to avoid dangling refs.</li>
+							<li><strong style="color: #00ff00;">No transient allocs:</strong> Pure stack temps here; heavy work (traces, conversions) is bounded. No arrays/ToArray() churn in the hot path.</li>
+							<li><strong style="color: #00ff00;">Separation of concerns:</strong> UI handles input &amp; feedback, <code>ULandSubsystem</code> handles mapping, <code>UMapSubsystem</code> manages registration and projection.</li>
+						</ul>
+
+						<details>
+							<summary><strong style="color:#00ff00;">Editor workflow (quick)</strong></summary>
+							<ul>
+								<li>Add <code>UMapMarkerComponent</code> to any actor you want visible.</li>
+								<li>Tweak icon/size/visibility in Details; the component registers in <code>BeginPlay()</code>.</li>
+								<li>Click the map to place up to three waypoints; markers appear on Map + Compass with distance/direction.</li>
+							</ul>
+						</details>
+					</div>
+				</section>
+
 
 
 				<!-- Quick Links -->
@@ -360,336 +475,105 @@
 			<li>Low‑overhead UI with pooled widgets and batched TMP updates.</li>
 		</ul>
 	</section>-->
+				<!--<section class="code-optim-section">
+	<h2>Rotation Code Optimization – Manual vs DOTween</h2>
+	<p style="color: #000; margin-top: 10px; line-height: 1.6;">
+		This type of rotation animation is used across multiple objects in the game—from
+		player turns to environmental elements and UI transitions. Because it runs frequently
+		and across many instances, optimizing it early was critical for reducing CPU overhead,
+		ensuring consistent frame times, and keeping GC allocations low—especially on mobile.
+	</p>
 
-				<section class="code-optim-section">
-					<h2>Rotation Code Optimization – Manual vs DOTween</h2>
-					<p style="color: #000; margin-top: 10px; line-height: 1.6;">
-						This type of rotation animation is used across multiple objects in the game—from
-						player turns to environmental elements and UI transitions. Because it runs frequently
-						and across many instances, optimizing it early was critical for reducing CPU overhead,
-						ensuring consistent frame times, and keeping GC allocations low—especially on mobile.
-					</p>
+	<div class="code-compare">-->
+				<!-- BEFORE -->
+				<!--<div>
+								<h3>Before</h3>
+								<pre><code>Quaternion startRotation = player.transform.rotation;
+	Quaternion endRotation = Quaternion.Euler(0, targetYAngle, 0);
+	float elapsed = 0f;
 
-					<div class="code-compare">
-						<!-- BEFORE -->
-						<div>
-							<h3>Before</h3>
-							<pre><code>Quaternion startRotation = player.transform.rotation;
-Quaternion endRotation = Quaternion.Euler(0, targetYAngle, 0);
-float elapsed = 0f;
-
-while (elapsed &lt; duration)
-{
-    elapsed += Time.deltaTime;
-    player.transform.rotation = Quaternion.Slerp(startRotation, endRotation, elapsed / duration);
-    yield return null;
-}</code></pre>
+	while (elapsed &lt; duration)
+	{
+		elapsed += Time.deltaTime;
+		player.transform.rotation = Quaternion.Slerp(startRotation, endRotation, elapsed / duration);
+		yield return null;
+	}</code></pre>
+							</div>-->
+				<!-- AFTER -->
+				<!--<div>
+								<h3>After (with DOTween)</h3>
+								<pre><code>// we use DOTween for interpolation and easing
+	player.transform.DORotate(new Vector3(0, targetYAngle, 0), duration).SetEase(Ease.OutSine);
+	yield return player.transform
+		.DORotate(new Vector3(0, targetYAngle, 0), 0)
+		.WaitForCompletion();</code></pre>
+							</div>
 						</div>
 
-						<!-- AFTER -->
-						<div>
-							<h3>After (with DOTween)</h3>
-							<pre><code>// we use DOTween for interpolation and easing
-player.transform.DORotate(new Vector3(0, targetYAngle, 0), duration).SetEase(Ease.OutSine);
-yield return player.transform
-    .DORotate(new Vector3(0, targetYAngle, 0), 0)
-    .WaitForCompletion();</code></pre>
+						<div class="optim-analysis">
+							<strong style="color: #00ff00;">Why this is better:</strong>
+							<ul>
+								<li><strong style="color: #00ff00;">Reduced lines of code:</strong> From 9 lines to 2—cleaner and easier to maintain.</li>
+								<li><strong style="color: #00ff00;">Improved performance:</strong> DOTween handles interpolation internally using optimized C# coroutines, avoiding extra GC pressure and CPU usage from per-frame math.</li>
+								<li><strong style="color: #00ff00;">Smoother animation:</strong> Built-in easing like <code>Ease.OutSine</code> makes transitions feel natural without manual math.</li>
+								<li><strong style="color: #00ff00;">GC friendly:</strong> No per-frame <code>Quaternion</code> recalculation or struct allocations—DOTween uses pooling and caching behind the scenes.</li>
+							</ul>
 						</div>
-					</div>
-
-					<div class="optim-analysis">
-						<strong style="color: #00ff00;">Why this is better:</strong>
-						<ul>
-							<li><strong style="color: #00ff00;">Reduced lines of code:</strong> From 9 lines to 2—cleaner and easier to maintain.</li>
-							<li><strong style="color: #00ff00;">Improved performance:</strong> DOTween handles interpolation internally using optimized C# coroutines, avoiding extra GC pressure and CPU usage from per-frame math.</li>
-							<li><strong style="color: #00ff00;">Smoother animation:</strong> Built-in easing like <code>Ease.OutSine</code> makes transitions feel natural without manual math.</li>
-							<li><strong style="color: #00ff00;">GC friendly:</strong> No per-frame <code>Quaternion</code> recalculation or struct allocations—DOTween uses pooling and caching behind the scenes.</li>
-						</ul>
-					</div>
-				</section>
+					</section>
 
 
 
 
+					<section id="progress">
+						<header class="major"><h2>Progress Screenshots</h2></header>
 
+						<div class="ba-compare" aria-label="Before and After comparison: KickFlipper art update">
+							<img class="ba-before" src="images/kickflipper/Before1.png" alt="Before – early art style">
+							<div class="ba-after-wrap">
+								<img class="ba-after" src="images/kickflipper/after1.png" alt="After – updated art style">
+							</div>
 
+							<div class="ba-divider" aria-hidden="true"></div>-->
+				<!-- The handle is focusable for keyboard control -->
+				<!--<button class="ba-handle" aria-label="Drag to compare before and after" tabindex="0"></button>
+		</div>
 
-				<section class="code-optim-section">
-					<h2>Trajectory Preview Optimization — Manual Loop vs Burst Job System</h2>
-					<p style="color:#000; margin-top:10px; line-height:1.6;">
-						This trajectory preview runs every frame while the shot is charging and for multiple objects.
-						Because it’s high-frequency and touches lots of math per frame, pushing it off the main thread
-						with Burst was a priority to reduce CPU spikes and keep frame times stable on mobile.
-					</p>
-
-					<div class="code-compare">
-						<!-- BEFORE -->
-						<div>
-							<h3>Before</h3>
-							<pre><code>private void DrawTrajectory(float force)
-{
-    frameCounter++;
-    Vector3 start = ball.position;
-    Vector3 targetPos = Target.position;
-    Vector3 toTarget = (targetPos - start);
-    float toTargetLen = toTarget.magnitude;
-    Vector3 toTargetN = (toTargetLen > 1e-5f) ? (toTarget / toTargetLen) : Vector3.forward;
-    float curveVal = (curveSlider != null) ? curveSlider.value : 0f;
-
-    bool inputsChanged =
-        cachedCharging != isCharging ||
-        Mathf.Abs(cachedForce - force) > 0.001f ||
-        Mathf.Abs(cachedCurveVal - curveVal) > 0.001f ||
-        (cachedStart - start).sqrMagnitude > 1e-4f ||
-        (cachedTargetPos - targetPos).sqrMagnitude > 1e-4f;
-
-    if (!inputsChanged && isCharging && (frameCounter % recomputeEveryNFrames != 0))
-    {
-        trajectoryLine.startColor = startColorCached;
-        trajectoryLine.endColor = endColorCached;
-        return;
-    }
-
-    cachedCharging = isCharging;
-    cachedForce = force;
-    cachedCurveVal = curveVal;
-    cachedStart = start;
-    cachedTargetPos = targetPos;
-    cachedToTarget = toTargetN;
-
-    if (!isCharging)
-    {
-        trajCount = 2;
-        trajPoints[0] = start;
-        trajPoints[1] = targetPos;
-
-        trajectoryLine.positionCount = trajCount;
-        trajectoryLine.SetPosition(0, trajPoints[0]);
-        trajectoryLine.SetPosition(1, trajPoints[1]);
-
-        trajectoryLine.startColor = startColorCached;
-        trajectoryLine.endColor = endColorCached;
-        return;
-    }
-
-    Vector3 sideDir = Vector3.Cross(Vector3.up, toTargetN).normalized;
-    Vector3 lateralAccel = sideDir * (curveVal * curveFactor);
-
-    trajCount = 0;
-    Vector3 pos = start;
-    Vector3 vel = toTargetN * force;
-    float traveled = 0f;
-
-    trajPoints[trajCount++] = pos;
-
-    float dt = trajectoryTimeStep;
-    Vector3 acc = Physics.gravity + lateralAccel;
-    float maxDist = maxRenderDistance;
-    int maxPts = Mathf.Min(maxTrajectoryPoints, trajPoints.Length - 1);
-
-    for (int i = 0; i &lt; maxPts; i++)
-    {
-        Vector3 nextVel = vel + acc * dt;
-        Vector3 nextPos = pos + nextVel * dt;
-
-        Vector3 seg = nextPos - pos;
-        float segLen = seg.magnitude;
-
-        if (traveled + segLen > maxDist)
-        {
-            float remain = maxDist - traveled;
-            Vector3 dir = segLen > 1e-6f ? (seg / segLen) : Vector3.forward;
-            nextPos = pos + dir * remain;
-            trajPoints[trajCount++] = nextPos;
-            break;
-        }
-
-        int hits = 0;
-        float castDist = Mathf.Max(0f, vel.magnitude * dt);
-        if (castDist > 1e-6f)
-            hits = Physics.RaycastNonAlloc(pos,
-			vel.normalized, ray1, castDist, ~0, QueryTriggerInteraction.Ignore);
-
-        if (hits > 0)
-        {
-            var hit = ray1[0];
-            trajPoints[trajCount++] = hit.point;
-
-            vel = Vector3.Reflect(vel, hit.normal) * bounceFactor;
-            pos = hit.point + vel.normalized * 0.01f;
-
-            Vector3 prev = trajPoints[trajCount - 2];
-            traveled += Vector3.Distance(prev, hit.point);
-            continue;
-        }
-
-        vel = nextVel;
-        pos = nextPos;
-        traveled += segLen;
-
-        trajPoints[trajCount++] = pos;
-    }
-
-    trajectoryLine.positionCount = trajCount;
-    for (int i = 0; i &lt; trajCount; i++)
-        trajectoryLine.SetPosition(i, trajPoints[i]);
-
-    trajectoryLine.startColor = startColorCached;
-    trajectoryLine.endColor = endColorCached;
-}</code></pre>
-						</div>
-
-						<!-- AFTER -->
-						<div>
-							<h3>After (Burst + Job System)</h3>
-							<pre><code>private void DrawTrajectory(float force)
-{
-    Vector3 start = ball.position;
-    Vector3 toTarget = (Target.position - start);
-    float len = toTarget.magnitude;
-    Vector3 dirN = (len > 1e-5f) ? (toTarget / len) : Vector3.forward;
-
-    if (!isCharging)
-    {
-        trajectoryLine.positionCount = 2;
-        trajectoryLine.SetPosition(0, start);
-        trajectoryLine.SetPosition(1, Target.position);
-        trajectoryLine.startColor = 
-				new Color(lineBaseColor.r, lineBaseColor.g,
-								lineBaseColor.b, 1f);
-        trajectoryLine.endColor   =
-				new Color(lineBaseColor.r, lineBaseColor.g, 
-								lineBaseColor.b, tailAlpha);
-        return;
-    }
-
-    float curveVal = curveSlider != null ? curveSlider.value : 0f;
-    Vector3 sideDir = Vector3.Cross(Vector3.up, dirN).normalized;
-    Vector3 lateralAccel = sideDir * (curveVal * curveFactor);
-    Vector3 accel = Physics.gravity + lateralAccel;
-    Vector3 initialVel = dirN * Mathf.Max(0f, force);
-   
-    int count = burstPreview.Predict(
-        start: start,
-        initialVelocity: initialVel,
-        accel: accel,
-        dt: trajectoryTimeStep,
-        maxPoints: maxTrajectoryPoints,
-        maxDistance: maxRenderDistance
-    );
-
-    int finalCount = count;
-    for (int i = 0; i &lt; count - 1; i++)
-    {
-        Vector3 p0 = burstPreview.GetPoint(i);
-        Vector3 p1 = burstPreview.GetPoint(i + 1);
-        Vector3 seg = p1 - p0;
-        float segLen = seg.magnitude;
-        if (segLen <= 1e-6f) continue;
-
-        if (Physics.Raycast(p0, seg / segLen, out var hit, segLen))
-        {
-            trajBuffer[0] = burstPreview.GetPoint(0);
-            for (int j = 1; j &lt;= i; j++) trajBuffer[j] = 
-								burstPreview.GetPoint(j);
-            trajBuffer[i + 1] = hit.point;
-            finalCount = i + 2;
-            goto PUSH;
-        }
-    }
-  
-    for (int i = 0; i &lt; count; i++)
-        trajBuffer[i] = burstPreview.GetPoint(i);
-
-PUSH:
-    trajectoryLine.positionCount = finalCount;
-    for (int i = 0; i &lt; finalCount; i++)
-        trajectoryLine.SetPosition(i, trajBuffer[i]);
-
-    trajectoryLine.startColor =
-		new Color(lineBaseColor.r, lineBaseColor.g, lineBaseColor.b, 1f);
-    trajectoryLine.endColor   =
-		new Color(lineBaseColor.r, lineBaseColor.g, lineBaseColor.b, tailAlpha);
-}</code></pre>
-						</div>
-					</div>
-
-					<div class="optim-analysis">
-						<strong style="color:#00ff00;">Why this is better (Burst + Jobs):</strong>
-						<ul>
-							<li><strong style="color:#00ff00;">Main-thread time down:</strong> The O(N) integration loop moves to a Burst-compiled job, cutting per-frame CPU on the main thread during charge previews.</li>
-							<li><strong style="color:#00ff00;">SIMD & cache-friendly math:</strong> Burst vectorizes arithmetic and tight loops, often unrolling and using fast-math where safe—meaning the same math costs fewer cycles.</li>
-							<li><strong style="color:#00ff00;">No per-frame GC churn:</strong> Positions are written to a pre-allocated buffer (e.g., <code>NativeArray&lt;float3&gt;</code>), then copied to a persistent <code>trajBuffer</code>. No <code>ToArray()</code> or transient allocations.</li>
-							<li><strong style="color:#00ff00;">Scales gracefully:</strong> Need more preview points or a smaller <code>dt</code> for smoother curves? The heavy work stays off the main thread, so FPS remains stable.</li>
-							<li><strong style="color:#00ff00;">Deterministic pathing (optional):</strong> Fixed <code>dt</code> + pure math in the job yields consistent results across devices (within float tolerance).</li>
-							<li><strong style="color:#00ff00;">Collision kept cheap:</strong> A single ray test per segment on the main thread to cut at first impact keeps physics interactions simple and affordable.</li>
-						</ul>
-
-						<!-- Optional perf brag line: edit numbers after profiling -->
-						<p style="margin-top:10px;">
-							<em>Result:</em> Main Player loop Now have 0 GC collection as compared to having 40Bytes per every time we draw trajectory, eliminating charge-time hitches. Which will help when multiple players would be using this Trajectory.
-						</p>
-
-						<p style="margin-top:10px;">
-							<strong>Implementation :</strong> I am Marking the job with <code>[BurstCompile]</code>, using <code>Unity.Mathematics</code> for math, storing points in a persistent <code>NativeArray&lt;float3&gt;</code> (Allocator.Persistent),
-							<code>Schedule()</code> the job, <code>Complete()</code> before reading, reuse buffers each frame, and <code>Dispose()</code> in <code>OnDestroy()</code>.
-						</p>
-					</div>
-				</section>
-
-
-				<section id="progress">
-					<header class="major"><h2>Updated Graphics </h2></header>
-
-					<div class="ba-compare" aria-label="Before and After comparison: KickFlipper art update">
-						<img class="ba-before" src="images/kickflipper/Before1.png" alt="Before – early art style">
-						<div class="ba-after-wrap">
-							<img class="ba-after" src="images/kickflipper/after1.png" alt="After – updated art style">
-						</div>
-
-						<div class="ba-divider" aria-hidden="true"></div>
-						<!-- The handle is focusable for keyboard control -->
-						<button class="ba-handle" aria-label="Drag to compare before and after" tabindex="0"></button>
-					</div>
-
-					<p class="ba-caption">
-						I updated the art direction by replacing early placeholder assets with low‑poly models,
-						giving the game a cleaner, more distinct visual style that enhances its looks.
-					</p>
-				</section>
-
-
+		<p class="ba-caption">
+			I updated the art direction by replacing early placeholder assets with low‑poly models,
+			giving the game a cleaner, more distinct visual style that enhances its looks.
+		</p>
+	</section>-->
 				<!-- Screenshots / Gallery -->
 				<section id="screenshots">
 					<header class="major"><h2>Screenshots</h2></header>
 					<div class="gallery">
 						<!-- Replace src paths with your images -->
 						<figure>
-							<a href="images/kickflipper/scrn1.jpg" class="lightbox">
-								<img src="images/kickflipper/scrn1.jpg" alt="HUB">
+							<a href="images/lunaris/scr1.png" class="lightbox">
+								<img src="images/lunaris/scr1.png" alt="OpenWorld">
 							</a>
-							<figcaption>Overworld/Level Selection/Hub.</figcaption>
+							<figcaption>OpenWorld.</figcaption>
 						</figure>
 
 						<figure>
-							<a href="images/kickflipper/scrn2.jpg" class="lightbox">
-								<img src="images/kickflipper/scrn2.jpg" alt="Characters">
+							<a href="images/lunaris/scr2.png" class="lightbox">
+								<img src="images/lunaris/scr2.png" alt="Waypoint Marker">
 							</a>
-							<figcaption>Talking to characters for Missions/Levels.</figcaption>
+							<figcaption>Waypoint Marker.</figcaption>
 						</figure>
 
 						<figure>
-							<a href="images/kickflipper/scrn3.png" class="lightbox">
-								<img src="images/kickflipper/scrn3.png" alt="Nighttime">
+							<a href="images/lunaris/scr3.png" class="lightbox">
+								<img src="images/lunaris/scr3.png" alt="Openworld">
 							</a>
-							<figcaption>Nighttime Gameplay.</figcaption>
+							<figcaption>OpenWorld.</figcaption>
 						</figure>
 
 						<figure>
-							<a href="images/kickflipper/scrn4.jpg" class="lightbox">
-								<img src="images/kickflipper/scrn4.jpg" alt="Mainmenu">
+							<a href="images/lunaris/scr4.png" class="lightbox">
+								<img src="images/lunaris/scr4.png" alt="TestLevel">
 							</a>
-							<figcaption>Menu Selection.</figcaption>
+							<figcaption>Test Level.</figcaption>
 						</figure>
 					</div>
 				</section>
