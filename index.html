@@ -232,40 +232,71 @@
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
 
-	<!-- Simple visible visit + unique visitor counters for index.html -->
 	<script>
 		(function () {
-			// Build a namespace per project (host + top-level path) so counters don't collide across repos.
-			const parts = location.pathname.split('/').filter(Boolean);
-			const repo = parts.length ? parts[0] : 'root';
-			const ns = (location.host + '-' + repo).replace(/\W+/g, '-').toLowerCase();
-
-			const totalKey = 'index_total';
-			const uniqueKey = 'index_unique';
-
-			const seenKey = `seen_unique_${ns}_${uniqueKey}`;
-			const hasSeen = !!localStorage.getItem(seenKey);
+			// Fixed namespace so keys never change across hosts/paths
+			const NAMESPACE = 'jamal-kundi-portfolio';
+			const TOTAL_KEY = 'index_total';
+			const UNIQUE_KEY = 'index_unique';
+			const SEEN_KEY = 'seen_unique_v1'; // bumps unique only once per browser
 
 			const visitEl = document.getElementById('visit-count');
 			const uniqueEl = document.getElementById('unique-count');
 
-			const hit = key => fetch(`https://api.countapi.xyz/hit/${encodeURIComponent(ns)}/${encodeURIComponent(key)}`, { cache: 'no-store' }).then(r => r.json());
-			const get = key => fetch(`https://api.countapi.xyz/get/${encodeURIComponent(ns)}/${encodeURIComponent(key)}`, { cache: 'no-store' }).then(r => r.json());
+			const API = 'https://api.countapi.xyz';
 
-			// Always increment total visits
-			hit(totalKey)
-				.then(d => { if (visitEl && typeof d.value === 'number') visitEl.textContent = d.value.toLocaleString(); })
-				.catch(() => { if (visitEl) visitEl.textContent = '—'; });
+			const setText = (el, val) => { if (el) el.textContent = (typeof val === 'number') ? val.toLocaleString() : '—'; };
 
-			// Unique: increment only on first visit per browser/device (localStorage gate)
-			(hasSeen ? get(uniqueKey) : hit(uniqueKey))
-				.then(d => {
-					if (!hasSeen) localStorage.setItem(seenKey, '1');
-					if (uniqueEl && d && typeof d.value === 'number') uniqueEl.textContent = d.value.toLocaleString();
-				})
-				.catch(() => { if (uniqueEl) uniqueEl.textContent = '—'; });
+			async function ensureKey(key) {
+				// Try to read; if missing, create with value=0
+				const getRes = await fetch(`${API}/get/${encodeURIComponent(NAMESPACE)}/${encodeURIComponent(key)}`, { cache: 'no-store' });
+				if (getRes.ok) {
+					const data = await getRes.json();
+					if (typeof data.value === 'number') return data.value;
+				}
+				const createRes = await fetch(`${API}/create?namespace=${encodeURIComponent(NAMESPACE)}&key=${encodeURIComponent(key)}&value=0`, { cache: 'no-store' });
+				const created = await createRes.json();
+				return typeof created.value === 'number' ? created.value : 0;
+			}
+
+			async function hit(key) {
+				const res = await fetch(`${API}/hit/${encodeURIComponent(NAMESPACE)}/${encodeURIComponent(key)}`, { cache: 'no-store' });
+				return res.json();
+			}
+
+			async function get(key) {
+				const res = await fetch(`${API}/get/${encodeURIComponent(NAMESPACE)}/${encodeURIComponent(key)}`, { cache: 'no-store' });
+				return res.json();
+			}
+
+			(async () => {
+				try {
+					// Make sure keys exist first
+					await Promise.all([ensureKey(TOTAL_KEY), ensureKey(UNIQUE_KEY)]);
+
+					// Total: always increment on load
+					const total = await hit(TOTAL_KEY);
+					setText(visitEl, total && total.value);
+
+					// Unique: increment once per browser
+					const seen = localStorage.getItem(SEEN_KEY);
+					if (!seen) {
+						const uniq = await hit(UNIQUE_KEY);
+						setText(uniqueEl, uniq && uniq.value);
+						localStorage.setItem(SEEN_KEY, '1');
+					} else {
+						const uniq = await get(UNIQUE_KEY);
+						setText(uniqueEl, uniq && uniq.value);
+					}
+				} catch (err) {
+					setText(visitEl, '—');
+					setText(uniqueEl, '—');
+					console.warn('Counter error:', err);
+				}
+			})();
 		})();
 	</script>
+
 
 </body>
 </html>
