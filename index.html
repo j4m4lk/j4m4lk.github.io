@@ -10,14 +10,13 @@
 	<style>
 		/* Reusable dark translucent card for banner content + image */
 		#banner .overlay-card {
-			background: rgba(0,0,0,0.55); /* black, ~55% */
+			background: rgba(0,0,0,0.55);
 			border: 1px solid rgba(255,255,255,0.06);
 			border-radius: 12px;
 			padding: 16px 18px;
-			backdrop-filter: blur(2px); /* subtle glass effect (safe to remove) */
+			backdrop-filter: blur(2px);
 			box-shadow: 0 8px 24px rgba(0,0,0,.35);
 		}
-
 			/* Ensure readable text on the dark card */
 			#banner .overlay-card,
 			#banner .overlay-card h1,
@@ -25,13 +24,12 @@
 			#banner .overlay-card p,
 			#banner .overlay-card .actions a,
 			#banner .overlay-card .actions .button {
-				color: #fff !important; /* override any inline black text */
+				color: #fff !important;
 			}
-
 		/* Tweak the image card */
 		#banner .image.overlay-card {
-			display: inline-block; /* shrink to fit image */
-			padding: 10px; /* space around the img */
+			display: inline-block;
+			padding: 10px;
 		}
 
 			#banner .image.overlay-card img {
@@ -42,49 +40,44 @@
 			}
 
 		:root {
-			/* Tweak if your sidebar width/gap differ in your theme */
-			--sidebar-width: 22rem; /* typical HTML5UP Editorial sidebar width */
-			--sidebar-gap: 2rem; /* space between sidebar and main */
+			--sidebar-width: 22rem; /* adjust if your theme differs */
+			--sidebar-gap: 2rem;
 		}
-
-		/* ===== Fixed background layer (MAIN AREA ONLY) ===== */
+		/* Fixed background layer (MAIN AREA ONLY) */
 		.site-bg.site-bg--main {
 			position: fixed;
 			top: 0;
 			bottom: 0;
 			left: calc(var(--sidebar-width) + var(--sidebar-gap));
 			right: 0;
-			z-index: 0; /* stays behind everything */
-			pointer-events: none; /* never blocks clicks/scroll */
+			z-index: 0;
+			pointer-events: none;
 		}
 
 			.site-bg.site-bg--main > img {
 				width: 100%;
 				height: 100%;
-				object-fit: cover; /* cover entire visible area */
+				object-fit: cover;
 				display: block;
 			}
-		/* Dim overlay (~50% visibility) */
+
 		.site-bg-dim {
 			position: absolute;
 			inset: 0;
 			background: rgba(0,0,0,0.5);
 		}
 
-		/* Make sure site content sits above bg */
 		#wrapper {
 			position: relative;
 			z-index: 1;
 		}
 
-		/* On smaller screens the sidebar stacks; show bg full width */
 		@media (max-width: 980px) {
 			.site-bg.site-bg--main {
 				left: 0;
 			}
 		}
 
-		/* Respect reduced-motion: hide animated bg for those users */
 		@media (prefers-reduced-motion: reduce) {
 			.site-bg {
 				display: none;
@@ -146,7 +139,6 @@
 					<div class="content overlay-card">
 						<header>
 							<h1>Hi, I’m Jamal Kundi</h1>
-							<!-- remove inline black so white shows cleanly -->
 							<p>Game Developer and Programmer</p>
 						</header>
 						<p>
@@ -194,7 +186,6 @@
 								<span style="color:#000; font-size:0.8em;">(Ongoing) Unreal Engine 5.6 C++</span>
 							</a>
 						</li>
-
 						<li><a href="generic.html">Professional Projects</a></li>
 						<li><a href="elements.html">University/Side Projects</a></li>
 					</ul>
@@ -232,71 +223,30 @@
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
 
+	<!-- Persistent visit + unique counters via Cloudflare Worker -->
 	<script>
 		(function () {
-			// Fixed namespace so keys never change across hosts/paths
-			const NAMESPACE = 'jamal-kundi-portfolio';
-			const TOTAL_KEY = 'index_total';
-			const UNIQUE_KEY = 'index_unique';
-			const SEEN_KEY = 'seen_unique_v1'; // bumps unique only once per browser
+			// TODO: replace with YOUR deployed Worker URL:
+			// e.g. 'https://jk-counter.YOURHANDLE.workers.dev/?key=index'
+            const ENDPOINT = 'https://jk-counter.jamalkundi.workers.dev/';
 
-			const visitEl = document.getElementById('visit-count');
-			const uniqueEl = document.getElementById('unique-count');
-
-			const API = 'https://api.countapi.xyz';
-
-			const setText = (el, val) => { if (el) el.textContent = (typeof val === 'number') ? val.toLocaleString() : '—'; };
-
-			async function ensureKey(key) {
-				// Try to read; if missing, create with value=0
-				const getRes = await fetch(`${API}/get/${encodeURIComponent(NAMESPACE)}/${encodeURIComponent(key)}`, { cache: 'no-store' });
-				if (getRes.ok) {
-					const data = await getRes.json();
-					if (typeof data.value === 'number') return data.value;
-				}
-				const createRes = await fetch(`${API}/create?namespace=${encodeURIComponent(NAMESPACE)}&key=${encodeURIComponent(key)}&value=0`, { cache: 'no-store' });
-				const created = await createRes.json();
-				return typeof created.value === 'number' ? created.value : 0;
-			}
-
-			async function hit(key) {
-				const res = await fetch(`${API}/hit/${encodeURIComponent(NAMESPACE)}/${encodeURIComponent(key)}`, { cache: 'no-store' });
-				return res.json();
-			}
-
-			async function get(key) {
-				const res = await fetch(`${API}/get/${encodeURIComponent(NAMESPACE)}/${encodeURIComponent(key)}`, { cache: 'no-store' });
-				return res.json();
-			}
-
-			(async () => {
-				try {
-					// Make sure keys exist first
-					await Promise.all([ensureKey(TOTAL_KEY), ensureKey(UNIQUE_KEY)]);
-
-					// Total: always increment on load
-					const total = await hit(TOTAL_KEY);
-					setText(visitEl, total && total.value);
-
-					// Unique: increment once per browser
-					const seen = localStorage.getItem(SEEN_KEY);
-					if (!seen) {
-						const uniq = await hit(UNIQUE_KEY);
-						setText(uniqueEl, uniq && uniq.value);
-						localStorage.setItem(SEEN_KEY, '1');
-					} else {
-						const uniq = await get(UNIQUE_KEY);
-						setText(uniqueEl, uniq && uniq.value);
-					}
-				} catch (err) {
-					setText(visitEl, '—');
-					setText(uniqueEl, '—');
+			fetch(ENDPOINT, { credentials: 'include' }) // include cookie for unique tracking
+				.then(r => r.json())
+				.then(data => {
+					const v = document.getElementById('visit-count');
+					const u = document.getElementById('unique-count');
+					if (v && typeof data.total === 'number') v.textContent = data.total.toLocaleString();
+					if (u && typeof data.unique === 'number') u.textContent = data.unique.toLocaleString();
+				})
+				.catch(err => {
 					console.warn('Counter error:', err);
-				}
-			})();
+					const v = document.getElementById('visit-count');
+					const u = document.getElementById('unique-count');
+					if (v) v.textContent = '—';
+					if (u) u.textContent = '—';
+				});
 		})();
 	</script>
-
 
 </body>
 </html>
