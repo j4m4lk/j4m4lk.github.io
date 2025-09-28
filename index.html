@@ -91,7 +91,15 @@
 			}
 		}
 
-		/* Visit counter badge */
+		/* Visit counter badges */
+		.visit-row {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 8px;
+			align-items: center;
+			margin-top: 6px;
+		}
+
 		.visit-badge {
 			display: inline-flex;
 			align-items: center;
@@ -103,6 +111,14 @@
 			border-radius: 10px;
 			font-size: .9rem;
 		}
+
+			.visit-badge .dot {
+				width: 8px;
+				height: 8px;
+				border-radius: 50%;
+				display: inline-block;
+				background: #00ffd5;
+			}
 	</style>
 </head>
 <body class="is-preload">
@@ -198,7 +214,10 @@
 				<!-- Footer -->
 				<footer id="footer">
 					<p class="copyright">&copy; Jamal. All rights reserved.</p>
-					<p class="visit-badge">👀 Visits: <span id="visit-count">…</span></p>
+					<div class="visit-row">
+						<span class="visit-badge"><span class="dot"></span> Visits: <span id="visit-count">…</span></span>
+						<span class="visit-badge"><span class="dot"></span> Unique visitors: <span id="unique-count">…</span></span>
+					</div>
 				</footer>
 
 			</div>
@@ -213,27 +232,38 @@
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
 
-	<!-- Simple visible visit counter for index.html -->
+	<!-- Simple visible visit + unique visitor counters for index.html -->
 	<script>
 		(function () {
-			// Namespace by host (e.g., username.github.io or custom domain)
-			const ns = (location.host || 'local').replace(/\./g, '-').toLowerCase();
-			const key = 'index'; // only count visits to the home page
+			// Build a namespace per project (host + top-level path) so counters don't collide across repos.
+			const parts = location.pathname.split('/').filter(Boolean);
+			const repo = parts.length ? parts[0] : 'root';
+			const ns = (location.host + '-' + repo).replace(/\W+/g, '-').toLowerCase();
 
-			const url = `https://api.countapi.xyz/hit/${encodeURIComponent(ns)}/${encodeURIComponent(key)}`;
+			const totalKey = 'index_total';
+			const uniqueKey = 'index_unique';
 
-			fetch(url, { cache: 'no-store' })
-				.then(r => r.json())
-				.then(data => {
-					const el = document.getElementById('visit-count');
-					if (el && typeof data.value === 'number') {
-						el.textContent = data.value.toLocaleString();
-					}
+			const seenKey = `seen_unique_${ns}_${uniqueKey}`;
+			const hasSeen = !!localStorage.getItem(seenKey);
+
+			const visitEl = document.getElementById('visit-count');
+			const uniqueEl = document.getElementById('unique-count');
+
+			const hit = key => fetch(`https://api.countapi.xyz/hit/${encodeURIComponent(ns)}/${encodeURIComponent(key)}`, { cache: 'no-store' }).then(r => r.json());
+			const get = key => fetch(`https://api.countapi.xyz/get/${encodeURIComponent(ns)}/${encodeURIComponent(key)}`, { cache: 'no-store' }).then(r => r.json());
+
+			// Always increment total visits
+			hit(totalKey)
+				.then(d => { if (visitEl && typeof d.value === 'number') visitEl.textContent = d.value.toLocaleString(); })
+				.catch(() => { if (visitEl) visitEl.textContent = '—'; });
+
+			// Unique: increment only on first visit per browser/device (localStorage gate)
+			(hasSeen ? get(uniqueKey) : hit(uniqueKey))
+				.then(d => {
+					if (!hasSeen) localStorage.setItem(seenKey, '1');
+					if (uniqueEl && d && typeof d.value === 'number') uniqueEl.textContent = d.value.toLocaleString();
 				})
-				.catch(() => {
-					const el = document.getElementById('visit-count');
-					if (el) el.textContent = '—';
-				});
+				.catch(() => { if (uniqueEl) uniqueEl.textContent = '—'; });
 		})();
 	</script>
 
