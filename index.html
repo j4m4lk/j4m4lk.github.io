@@ -8,40 +8,38 @@
 
 	<!-- Page-local styles for full-page GIF background (under #main only) -->
 	<style>
+		/* Reusable dark translucent card for banner content + image */
+		#banner .overlay-card {
+			background: rgba(0,0,0,0.55); /* black, ~55% */
+			border: 1px solid rgba(255,255,255,0.06);
+			border-radius: 12px;
+			padding: 16px 18px;
+			backdrop-filter: blur(2px); /* subtle glass effect (safe to remove) */
+			box-shadow: 0 8px 24px rgba(0,0,0,.35);
+		}
 
-        /* Reusable dark translucent card for banner content + image */
-        #banner .overlay-card {
-            background: rgba(0,0,0,0.55); /* black, ~55% */
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 12px;
-            padding: 16px 18px;
-            backdrop-filter: blur(2px); /* subtle glass effect (safe to remove) */
-            box-shadow: 0 8px 24px rgba(0,0,0,.35);
-        }
+			/* Ensure readable text on the dark card */
+			#banner .overlay-card,
+			#banner .overlay-card h1,
+			#banner .overlay-card h2,
+			#banner .overlay-card p,
+			#banner .overlay-card .actions a,
+			#banner .overlay-card .actions .button {
+				color: #fff !important; /* override any inline black text */
+			}
 
-            /* Ensure readable text on the dark card */
-            #banner .overlay-card,
-            #banner .overlay-card h1,
-            #banner .overlay-card h2,
-            #banner .overlay-card p,
-            #banner .overlay-card .actions a,
-            #banner .overlay-card .actions .button {
-                color: #fff !important; /* override any inline black text */
-            }
+		/* Tweak the image card */
+		#banner .image.overlay-card {
+			display: inline-block; /* shrink to fit image */
+			padding: 10px; /* space around the img */
+		}
 
-        /* Tweak the image card */
-        #banner .image.overlay-card {
-            display: inline-block; /* shrink to fit image */
-            padding: 10px; /* space around the img */
-        }
-
-            #banner .image.overlay-card img {
-                display: block;
-                border-radius: 10px;
-                max-width: 100%;
-                height: auto;
-            }
-
+			#banner .image.overlay-card img {
+				display: block;
+				border-radius: 10px;
+				max-width: 100%;
+				height: auto;
+			}
 
 		:root {
 			/* Tweak if your sidebar width/gap differ in your theme */
@@ -91,6 +89,19 @@
 			.site-bg {
 				display: none;
 			}
+		}
+
+		/* Visit counter badge */
+		.visit-badge {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			background: rgba(0,0,0,.6);
+			color: #fff;
+			border: 1px solid rgba(255,255,255,.08);
+			padding: 6px 10px;
+			border-radius: 10px;
+			font-size: .9rem;
 		}
 	</style>
 </head>
@@ -143,7 +154,6 @@
 					</span>
 				</section>
 
-
 			</div>
 		</div>
 
@@ -188,6 +198,7 @@
 				<!-- Footer -->
 				<footer id="footer">
 					<p class="copyright">&copy; Jamal. All rights reserved.</p>
+					<p class="visit-badge">👀 Visits: <span id="visit-count">…</span></p>
 				</footer>
 
 			</div>
@@ -201,6 +212,30 @@
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
+
+	<!-- Simple visible visit counter for index.html -->
+	<script>
+		(function () {
+			// Namespace by host (e.g., username.github.io or custom domain)
+			const ns = (location.host || 'local').replace(/\./g, '-').toLowerCase();
+			const key = 'index'; // only count visits to the home page
+
+			const url = `https://api.countapi.xyz/hit/${encodeURIComponent(ns)}/${encodeURIComponent(key)}`;
+
+			fetch(url, { cache: 'no-store' })
+				.then(r => r.json())
+				.then(data => {
+					const el = document.getElementById('visit-count');
+					if (el && typeof data.value === 'number') {
+						el.textContent = data.value.toLocaleString();
+					}
+				})
+				.catch(() => {
+					const el = document.getElementById('visit-count');
+					if (el) el.textContent = '—';
+				});
+		})();
+	</script>
 
 </body>
 </html>
