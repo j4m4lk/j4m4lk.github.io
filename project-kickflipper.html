@@ -296,6 +296,31 @@
 			font-weight: 600;
 			color: #00ffd5;
 		}
+
+        .ba-label {
+            position: absolute;
+            top: 12px;
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.65);
+            color: #fff;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .ba-label-before {
+            left: 12px;
+        }
+
+        .ba-label-after {
+            right: 12px;
+        }
+
+
 	</style>
 </head>
 <body class="is-preload">
@@ -360,6 +385,61 @@
 			<li>Low‑overhead UI with pooled widgets and batched TMP updates.</li>
 		</ul>
 	</section>-->
+
+				<div class="ba-compare" aria-label="Before and After comparison: KickFlipper art update">
+					<img class="ba-before" src="images/kickflipper/Before1.png" alt="After – Updated art style">
+
+					<div class="ba-after-wrap">
+						<img class="ba-after" src="images/kickflipper/after1.png" alt="Before – Early art style">
+					</div>
+
+					<!-- Labels -->
+					<div class="ba-label ba-label-before">AFTER</div>
+					<div class="ba-label ba-label-after">BEFORE</div>
+
+					<div class="ba-divider" aria-hidden="true"></div>
+					<button class="ba-handle" aria-label="Drag to compare before and after" tabindex="0"></button>
+				</div>
+
+
+
+				<!-- Screenshots / Gallery -->
+				<section id="screenshots">
+					<header class="major"><h2>Screenshots</h2></header>
+					<div class="gallery">
+						<!-- Replace src paths with your images -->
+						<figure>
+							<a href="images/kickflipper/scrn1.jpg" class="lightbox">
+								<img src="images/kickflipper/scrn1.jpg" alt="HUB">
+							</a>
+							<figcaption>Overworld/Level Selection/Hub.</figcaption>
+						</figure>
+
+						<figure>
+							<a href="images/kickflipper/scrn2.jpg" class="lightbox">
+								<img src="images/kickflipper/scrn2.jpg" alt="Characters">
+							</a>
+							<figcaption>Talking to characters for Missions/Levels.</figcaption>
+						</figure>
+
+						<figure>
+							<a href="images/kickflipper/scrn3.png" class="lightbox">
+								<img src="images/kickflipper/scrn3.png" alt="Nighttime">
+							</a>
+							<figcaption>Nighttime Gameplay.</figcaption>
+						</figure>
+
+						<figure>
+							<a href="images/kickflipper/scrn4.jpg" class="lightbox">
+								<img src="images/kickflipper/scrn4.jpg" alt="Mainmenu">
+							</a>
+							<figcaption>Menu Selection.</figcaption>
+						</figure>
+					</div>
+				</section>
+
+
+
 
 				<section class="code-optim-section">
 					<h2>Rotation Code Optimization – Manual vs DOTween</h2>
@@ -638,61 +718,7 @@ PUSH:
 				</section>
 
 
-				<section id="progress">
-					<header class="major"><h2>Updated Graphics </h2></header>
 
-					<div class="ba-compare" aria-label="Before and After comparison: KickFlipper art update">
-						<img class="ba-before" src="images/kickflipper/Before1.png" alt="Before – early art style">
-						<div class="ba-after-wrap">
-							<img class="ba-after" src="images/kickflipper/after1.png" alt="After – updated art style">
-						</div>
-
-						<div class="ba-divider" aria-hidden="true"></div>
-						<!-- The handle is focusable for keyboard control -->
-						<button class="ba-handle" aria-label="Drag to compare before and after" tabindex="0"></button>
-					</div>
-
-					<p class="ba-caption">
-						I updated the art direction by replacing early placeholder assets with low‑poly models,
-						giving the game a cleaner, more distinct visual style that enhances its looks.
-					</p>
-				</section>
-
-
-				<!-- Screenshots / Gallery -->
-				<section id="screenshots">
-					<header class="major"><h2>Screenshots</h2></header>
-					<div class="gallery">
-						<!-- Replace src paths with your images -->
-						<figure>
-							<a href="images/kickflipper/scrn1.jpg" class="lightbox">
-								<img src="images/kickflipper/scrn1.jpg" alt="HUB">
-							</a>
-							<figcaption>Overworld/Level Selection/Hub.</figcaption>
-						</figure>
-
-						<figure>
-							<a href="images/kickflipper/scrn2.jpg" class="lightbox">
-								<img src="images/kickflipper/scrn2.jpg" alt="Characters">
-							</a>
-							<figcaption>Talking to characters for Missions/Levels.</figcaption>
-						</figure>
-
-						<figure>
-							<a href="images/kickflipper/scrn3.png" class="lightbox">
-								<img src="images/kickflipper/scrn3.png" alt="Nighttime">
-							</a>
-							<figcaption>Nighttime Gameplay.</figcaption>
-						</figure>
-
-						<figure>
-							<a href="images/kickflipper/scrn4.jpg" class="lightbox">
-								<img src="images/kickflipper/scrn4.jpg" alt="Mainmenu">
-							</a>
-							<figcaption>Menu Selection.</figcaption>
-						</figure>
-					</div>
-				</section>
 
 				<!-- Optimization Log -->
 				<!--<section id="optimizations">

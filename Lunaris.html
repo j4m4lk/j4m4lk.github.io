@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>Project KickFlipper – Progress & Optimization</title>
+	<title>Project Lunaris – Progress & Optimization</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="assets/css/main.css" />
@@ -257,6 +257,7 @@
         }
 
 
+
 		/* Gallery grid */
 		.gallery {
 			display: grid;
@@ -316,31 +317,109 @@
 			font-weight: 600;
 			color: #00ffd5;
 		}
+
+
+        /* ===== FULL PAGE BACKGROUND IMAGE ===== */
+        .site-bg--full {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+            .site-bg--full img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+                display: block;
+            }
+
+        /* Dark overlay for readability */
+        .site-bg-dim {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55); /* tweak to taste */
+        }
+
+        /* Ensure site content stays above background */
+        #wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Respect reduced motion / accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            .site-bg {
+                display: none;
+            }
+        }
+
+
+        /* Force readable text on dark background */
+        body,
+        #banner,
+        #banner p,
+        #banner h1,
+        #banner h2,
+        #banner h3,
+        #banner .meta,
+        #banner strong,
+        #banner a,
+        .code-optim-section,
+        .code-optim-section p,
+        .code-optim-section h2,
+        .code-optim-section h3 {
+            color: #fff;
+        }
+
+        /* Explicitly keep contact section black */
+        .contact-black,
+        .contact-black h2,
+        .contact-black li,
+        .contact-black a {
+            color: #000 !important;
+        }
+
+
+
+
 	</style>
 </head>
 <body class="is-preload">
+	<div class="site-bg site-bg--full" aria-hidden="true">
+		<img src="images/Lunaris/Timeofday/Dusk.png" alt="Project Lunaris background">
+		<div class="site-bg-dim"></div>
+	</div>
+
 	<div id="wrapper">
+
 
 		<!-- Main -->
 		<div id="main">
 			<div class="inner">
 
+
+
+
+
 				<!-- Header -->
 				<header id="header">
-					<a href="index.html" class="logo"><strong>Portfolio</strong> by Jamal</a>
+					<a href="index.html" class="logo">Portfolio by Jamal</a>
 				</header>
 
 				<section id="banner">
 					<div class="content">
 						<header>
 							<h1>Project Lunaris</h1>
-							<p style="color: #000;">A project I'm currently developing for Segritude games, Working as a Unreal Engine Programmer, Using Blueprints and C++</p>
+							<p style="color: #fff;">A project I'm currently developing for Segritude games, Using Blueprints and C++</p>
 						</header>
 						<p class="meta">Status: <strong>In Development</strong> · Engine: <strong>Unreal Engine 5.6</strong> · Platforms: <strong>PC </strong></p>
 						<div class="tags">
 							<span class="tag">Unreal Engine 5</span>
 							<span class="tag">C++</span>
 							<span class="tag">Survival</span>
+							<span class="tag">Open-World</span>
 						</div>
 
 
@@ -348,20 +427,154 @@
 
 
 
-					<!-- Faded image behind content -->
-					<div class="banner-bg-image">
-						<img src="images/Lunaris/intro.png" alt="Project Lunaris key art">
+
+				</section>
+
+				<p style="color: #fff; line-height: 1.6;">
+					I’m working as C++ programmer on an Unreal Engine 5 survival RPG inspired by Rust and Valheim. I work across UE5 C++ and Blueprints, owning multiplayer/replication and core gameplay systems (AI, party system, world map & waypoints/compass, interaction, and UI/UX). My focus is a modular, data-driven architecture with safe pointers (TObjectPtr/TWeakObjectPtr), const-correctness, and early-out guards—plus ongoing profiling and optimizations to keep Gameplay smooth and the codebase scalable.
+				</p>
+
+
+				<section id="screenshots">
+					<header class="major">
+						<h2 style="color:#fff;">Screenshots</h2>
+					</header>
+					<div class="gallery">
+						<figure>
+							<a href="images/Lunaris/scr1.png" class="lightbox">
+								<img src="images/Lunaris/scr1.png" alt="OpenWorld">
+							</a>
+							<figcaption>OpenWorld.</figcaption>
+						</figure>
+
+						<figure>
+							<a href="images/Lunaris/scr2.png" class="lightbox">
+								<img src="images/Lunaris/scr2.png" alt="Waypoint Marker">
+							</a>
+							<figcaption>Waypoint Marker.</figcaption>
+						</figure>
+
+						<figure>
+							<a href="images/Lunaris/scr3.png" class="lightbox">
+								<img src="images/Lunaris/scr3.png" alt="Openworld">
+							</a>
+							<figcaption>OpenWorld.</figcaption>
+						</figure>
+
+						<figure>
+							<a href="images/Lunaris/scr4.png" class="lightbox">
+								<img src="images/Lunaris/scr4.png" alt="TestLevel">
+							</a>
+							<figcaption>Test Level.</figcaption>
+						</figure>
+
+						<figure>
+							<a href="images/Lunaris/Timeofday/Day.png" class="lightbox">
+								<img src="images/Lunaris/Timeofday/Day.png" alt="TimeOfDay">
+							</a>
+							<figcaption>DayTime.</figcaption>
+						</figure>
+
+						<figure>
+							<a href="images/Lunaris/Timeofday/Night.png" class="lightbox">
+								<img src="images/Lunaris/Timeofday/Night.png" alt="TimeOfDay">
+							</a>
+							<figcaption>NightTime.</figcaption>
+						</figure>
+
 					</div>
 				</section>
 
-				<p style="color:#000; line-height:1.6;">
-					I’m working as C++ programmer on an Unreal Engine 5 survival RPG inspired by Enshrouded and Valheim. I work across UE5 C++ and Blueprints, owning multiplayer/replication and core gameplay systems (AI, party system, world map & waypoints/compass, interaction, and UI/UX). My focus is a modular, data-driven architecture with safe pointers (TObjectPtr/TWeakObjectPtr), const-correctness, and early-out guards—plus ongoing profiling and optimizations to keep Gameplay smooth and the codebase scalable.
-				</p>
+
+				<section class="code-optim-section">
+					<h2>StateTree-Driven Animal AI — Network-Safe & Data-Driven (UE5)</h2>
+
+					<p style="color: #fff; margin-top: 10px; line-height: 1.6;">
+						This AI Chicken uses Unreal Engine 5’s StateTree to drive clean, data-driven behavior switching
+						(idle, wander, flee, death) while remaining fully server-authoritative and multiplayer-safe.
+						The character owns its health and leash data, while the StateTree reacts purely to replicated state and gameplay events.
+					</p>
+
+					<!-- Behaviour State Diagram -->
+					<div class="image-preview" style="margin: 24px 0; text-align: center;">
+						<img src="images/Lunaris/AI.png"
+							 alt="Chicken AI StateTree behaviour diagram"
+							 style="max-width: 100%; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,.35);" />
+						<p style="font-size: 0.85em; margin-top: 8px; color: #00ff00;">
+							StateTree overview — Graze/Patrol → Run → LookforPlayer → Returnhome
+						</p>
+					</div>
+
+					<!-- AI Action GIF -->
+					<div class="gif-preview" style="margin: 28px 0; text-align:center;">
+						<img src="images/Lunaris/chicken-ai-demo.gif"
+							 alt="Chicken AI switching states in gameplay"
+							 style="max-width: 100%; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,.35);" />
+						<p style="font-size: 0.85em; margin-top: 8px; color: #00ff00;">
+							In-game behavior — StateTree reacting to threats, Player, and Home Area constraints
+						</p>
+					</div>
+
+					<div class="code-compare">
+						<div>
+							<h3>Leash Initialization & StateTree Bootstrapping</h3>
+							<pre><code>void AChicken::SetLeash_Implementation(
+	const FVector& Center,
+	float Radius,
+	AActor* SpawnerOwner)
+{
+	if (!HasAuthority())
+		return;
+
+	HomeLocation = Center;
+	WanderRadius = Radius;
+	bLeashActive = true;
+	OwningSpawner = SpawnerOwner;
+
+	if (StateTreeComponent)
+	{
+		StateTreeComponent->SendStateTreeEvent(
+			FStateTreeEvent(
+				FGameplayTag::RequestGameplayTag(
+					FName("AI.Event.SetLeash"))));
+	}
+
+	GetWorldTimerManager().SetTimerForNextTick([this]()
+	{
+		if (StateTreeComponent && !StateTreeComponent->IsRunning())
+		{
+			StateTreeComponent->StartLogic();
+		}
+	});
+}</code></pre>
+						</div>
+					</div>
+
+					<div class="optim-analysis">
+						<strong style="color: #00ff00;">Key design points:</strong>
+						<ul>
+							<li><strong style="color: #00ff00;">Server-authoritative AI:</strong> All state changes originate on the server and replicate cleanly to clients.</li>
+							<li><strong style="color: #00ff00;">Event-driven StateTree:</strong> AI reacts to gameplay events instead of polling or ticking heavy logic.</li>
+							<li><strong style="color: #00ff00;">Safe multiplayer startup:</strong> Clients only start StateTree logic once replicated leash data is valid.</li>
+							<li><strong style="color: #00ff00;">Component-based health:</strong> Death, cleanup, and destruction are handled through a reusable HealthGauge component.</li>
+						</ul>
+
+						<strong style="color: #00ff00;">Why this matters:</strong>
+						<ul>
+							<li>Easy to extend with new animals or behaviors</li>
+							<li>State logic lives in data, not hardcoded branches</li>
+							<li>Predictable replication and debugging</li>
+						</ul>
+					</div>
+				</section>
+
+
+
 
 
 				<section class="code-optim-section">
 					<h2>Modular Map & Waypoint System — Component-Driven, Safe & Optimized (UE5)</h2>
-					<p style="color: #000; margin-top: 10px; line-height: 1.6;">
+					<p style="color: #fff; margin-top: 10px; line-height: 1.6;">
 						The map/compass is fully modular: attach a <code>UMapMarkerComponent</code> to any Actor and it auto-registers on the Map and Compass.
 						Designers can tweak the icon, size, color, and visibility directly in the editor—no hardcoded links. Below is the waypoint add flow,
 						which converts a screen click into a world-space marker and safely spawns it.
@@ -447,6 +660,13 @@
 						</details>
 					</div>
 				</section>
+
+
+
+
+
+
+
 
 
 
@@ -544,39 +764,29 @@
 		</p>
 	</section>-->
 				<!-- Screenshots / Gallery -->
-				<section id="screenshots">
-					<header class="major"><h2>Screenshots</h2></header>
-					<div class="gallery">
-						<!-- Replace src paths with your images -->
-						<figure>
-							<a href="images/Lunaris/scr1.png" class="lightbox">
-								<img src="images/Lunaris/scr1.png" alt="OpenWorld">
-							</a>
-							<figcaption>OpenWorld.</figcaption>
-						</figure>
 
-						<figure>
-							<a href="images/Lunaris/scr2.png" class="lightbox">
-								<img src="images/Lunaris/scr2.png" alt="Waypoint Marker">
-							</a>
-							<figcaption>Waypoint Marker.</figcaption>
-						</figure>
 
-						<figure>
-							<a href="images/Lunaris/scr3.png" class="lightbox">
-								<img src="images/Lunaris/scr3.png" alt="Openworld">
-							</a>
-							<figcaption>OpenWorld.</figcaption>
-						</figure>
+				<section class="code-optim-section">
+					<h2>Official Studio Page</h2>
 
-						<figure>
-							<a href="images/Lunaris/scr4.png" class="lightbox">
-								<img src="images/Lunaris/scr4.png" alt="TestLevel">
-							</a>
-							<figcaption>Test Level.</figcaption>
-						</figure>
+					<p style="color: #fff; margin-top: 10px; line-height: 1.6;">
+						Project Lunaris is being developed under Segritude LTD, an independent game studio focused on
+						building scalable multiplayer systems and immersive gameplay experiences using Unreal Engine 5.
+					</p>
+
+					<div style="margin-top:20px; text-align:center;">
+						<a href="https://www.segritude.com/"
+						   target="_blank"
+						   rel="noopener noreferrer"
+						   class="button primary">
+							🌐 Visit Segritude LTD — Official Website
+						</a>
 					</div>
+
+
 				</section>
+
+
 
 				<!-- Optimization Log -->
 				<!--<section id="optimizations">
@@ -668,7 +878,9 @@
 	</section>-->
 				<!-- CTA -->
 				<section>
-					<header class="major"><h2>Contact</h2></header>
+					<header class="major">
+						<h2 style="color:#fff;">Contact</h2>
+					</header>
 					<p>Got any Suggestions or queries? Reach out or check out the game on Play Store.</p>
 					<ul class="actions">
 						<li><a href="mailto:jamal.kundi@gmail.com" class="button primary">Email Me</a></li>
@@ -707,7 +919,7 @@
 					</ul>
 				</nav>
 
-				<section>
+				<section class="contact-black">
 					<header class="major"><h2>Get in touch</h2></header>
 					<ul class="contact">
 						<li class="icon solid fa-envelope"><a href="#">jamal.kundi@gmail.com</a></li>
@@ -715,6 +927,7 @@
 						<li class="icon solid fa-home">Belfast, Northern Ireland, United Kingdom.</li>
 					</ul>
 				</section>
+
 
 				<footer id="footer">
 					<p class="copyright">&copy; Jamal. All rights reserved.</p>
