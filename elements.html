@@ -25,6 +25,49 @@
 			.two-column .content {
 				flex: 1;
 			}
+
+        #footer {
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+            position: fixed;
+            bottom: 20px;
+            left: 80px;
+            z-index: 999;
+            /* remove box look */
+            background: none;
+            padding: 0;
+            border: none;
+            box-shadow: none;
+            backdrop-filter: none;
+        }
+
+            /* keep text readable */
+            #footer,
+            #footer p,
+            #footer span {
+                color: #fff;
+                font-size: 0.85rem;
+            }
+
+        /* tidy layout */
+        .visit-row {
+            margin-top: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        /* optional: subtle dot */
+        .visit-badge .dot {
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            background: #00ff00;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+
+
 	</style>
 </head>
 <body class="is-preload">
@@ -318,7 +361,7 @@
 					</nav>
 
 
-					<section>
+					<!--<section>
 						<header class="major">
 							<h2>Get in touch</h2>
 						</header>
@@ -328,7 +371,7 @@
 							<li class="icon solid fa-phone">+(44) 7448499436</li>
 							<li class="icon solid fa-home">Belfast, Northern Ireland, United Kingdom.</li>
 						</ul>
-					</section>
+					</section>-->
 
 					<!-- Footer -->
 					<footer id="footer">

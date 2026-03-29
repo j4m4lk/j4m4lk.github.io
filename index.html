@@ -112,8 +112,68 @@
 				display: inline-block;
 				background: #00ffd5;
 			}
+
+        #footer {
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+            position: fixed;
+            bottom: 20px;
+            left: 80px;
+            z-index: 999;
+            /* remove box look */
+            background: none;
+            padding: 0;
+            border: none;
+            box-shadow: none;
+            backdrop-filter: none;
+        }
+
+            /* keep text readable */
+            #footer,
+            #footer p,
+            #footer span {
+                color: #fff;
+                font-size: 0.85rem;
+            }
+
+        /* tidy layout */
+        .visit-row {
+            margin-top: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        /* optional: subtle dot */
+        .visit-badge .dot {
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            background: #00ff00;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+
 	</style>
 </head>
+
+<script>
+	function copyEmail() {
+		const email = "jamal.kundi@gmail.com";
+
+		navigator.clipboard.writeText(email).then(() => {
+			const feedback = document.getElementById("copy-feedback");
+			feedback.style.display = "block";
+
+			setTimeout(() => {
+				feedback.style.display = "none";
+			}, 2000);
+		});
+	}
+</script>
+
+
+
 <body class="is-preload">
 
 	<!-- Fixed GIF background under the MAIN content only -->
@@ -155,6 +215,40 @@
 								</a>
 							</li>
 						</ul>
+
+						<ul class="actions">
+
+							<div style="margin-top: 20px;">
+								<p style="color:#00ffd5; font-size:1.05rem; font-weight:600; margin-bottom:12px; text-align:center;">
+									Get in touch with me
+								</p>
+
+								<ul class="actions">
+									<li>
+										<span style="color:#fff; font-weight:600;">
+											📧 jamal.kundi@gmail.com
+										</span>
+									</li>
+
+									<li>
+										<button onclick="copyEmail()" class="button">
+											📋 Copy Email
+										</button>
+									</li>
+
+									<li>
+										<a href="mailto:jamal.kundi@gmail.com" class="button primary">
+											✉️ Send Email
+										</a>
+									</li>
+								</ul>
+							</div>
+
+						<!-- Small feedback text -->
+						<p id="copy-feedback" style="color:#00ff00; display:none; margin-top:10px;">
+							Email copied to clipboard!
+						</p>
+
 					</div>
 
 					<span class="image object overlay-card">
@@ -191,7 +285,7 @@
 					</ul>
 				</nav>
 
-				<section>
+				<!--<section>
 					<header class="major">
 						<h2>Get in touch</h2>
 					</header>
@@ -200,7 +294,7 @@
 						<li class="icon solid fa-phone">+(44) 7448499436</li>
 						<li class="icon solid fa-home">Belfast, Northern Ireland, United Kingdom.</li>
 					</ul>
-				</section>
+				</section>-->
 
 				<!-- Footer -->
 				<footer id="footer">
