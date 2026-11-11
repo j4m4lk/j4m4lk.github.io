@@ -1,109 +1,42 @@
-<!DOCTYPE HTML>
-<!--
-	Editorial by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>Jamal Kundi - Game Developer and Programmer - Portfolio</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
-	<style>
-		.two-column {
-			display: flex;
-			align-items: flex-start;
-			gap: 20px; /* Adjust the gap as needed */
-			margin-bottom: 40px; /* Add some space between sections */
-		}
-
-			.two-column .image {
-				flex: 1;
-			}
-
-			.two-column .content {
-				flex: 1;
-			}
-
-        #footer {
-            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
-            position: fixed;
-            bottom: 20px;
-            left: 80px;
-            z-index: 999;
-            /* remove box look */
-            background: none;
-            padding: 0;
-            border: none;
-            box-shadow: none;
-            backdrop-filter: none;
-        }
-
-            /* keep text readable */
-            #footer,
-            #footer p,
-            #footer span {
-                color: #fff;
-                font-size: 0.85rem;
-            }
-
-        /* tidy layout */
-        .visit-row {
-            margin-top: 4px;
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        /* optional: subtle dot */
-        .visit-badge .dot {
-            display: inline-block;
-            width: 5px;
-            height: 5px;
-            background: #00ff00;
-            border-radius: 50%;
-            margin-right: 5px;
-        }
-
-
-
-	</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>University and side projects, Jamal Kundi</title>
+<meta name="description" content="Side projects, MSc Games Programming coursework and game jams: rendering, AI, VR and networking.">
+<meta property="og:title" content="University and side projects, Jamal Kundi">
+<meta property="og:description" content="Side projects, MSc Games Programming coursework and game jams: rendering, AI, VR and networking.">
+<meta property="og:image" content="https://j4m4lk.github.io/images/thumbs/underwater.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Rubik:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
 </head>
-<body class="is-preload">
-
-	<!-- Wrapper -->
-	<div id="wrapper">
-
-		<!-- Main -->
-		<div id="main">
-			<div class="inner">
-
-				<!-- Header -->
-				<header id="header">
-					<a href="index.html" class="logo"><strong>University/Side </strong> Projects</a>
-
-				</header>
-				<!-- Content -->
-				<section>
-
-					<header class="main">
-						<h2>My Side Projects </h2>
-					</header>
-					<p>I worked on these projects in my spare time to expand my knowledge of the Game engines I was using.</p>
-
-					<header class="main">
-						<h2> Third person demo game (UNREAL Engine 5 C++) </h2>
-					</header>
-					<div class="two-column">
-						<span class="image main">
-							<video width="700" height="500" autoplay muted loop>
-								<source src="images/Clip1.mp4" type="video/mp4">
-								Your browser does not support the video tag.
-							</video>
-						</span>
-						<div class="content">
-							<p> Made With UNREAL ENGINE 5, Where I made multiple mechanics and learned	UNREAL ENGINE 5	Workflow </p>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+	<div class="wrap nav-row">
+		<a class="brand" href="index.html">Jamal Kundi</a>
+		<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+		<ul class="nav-links" id="nav-links"><li><a href="rooks-quest.html">Rook's Quest</a></li><li><a href="unreal.html">Unreal Engine 5</a></li><li><a href="generic.html">Shipped games</a></li><li><a href="elements.html" aria-current="page">University</a></li><li><a href="index.html#studio">Studio</a></li><li><a href="index.html#contact">Contact</a></li></ul>
+	</div>
+	<div class="band" aria-hidden="true"></div>
+</header>
+<main id="main">
+<div class="wrap page-head">
+	<h1>University and side projects</h1>
+	<p class="lead">Rendering, AI, VR and networking work from my MSc at the University of Hull and my own time.</p>
+	<div class="filters" role="group" aria-label="Filter projects">
+		<button type="button" data-filter="all" aria-pressed="true">All</button>
+		<button type="button" data-filter="unity" aria-pressed="false">Unity</button>
+		<button type="button" data-filter="unreal" aria-pressed="false">Unreal Engine 5</button>
+		<button type="button" data-filter="cpp" aria-pressed="false">C++</button>
+		<button type="button" data-filter="xr" aria-pressed="false">VR and AR</button>
+	</div>
+</div>
+<div class="wrap">
+<div class="group"><h2 class="group-title">Side projects</h2><p>I worked on these projects in my spare time to expand my knowledge of the game engines I was using.</p><article class="work" data-tags="unreal cpp"><div class="work-media"><div class="frame"><video data-clip muted loop playsinline preload="none" poster="images/posters/Clip1.jpg" aria-label="Third-person demo gameplay"><source src="images/Clip1.mp4" type="video/mp4"></video></div></div><div class="work-body"><h3>Third-person demo game</h3><ul class="tags"><li>Unreal Engine 5</li><li>C++</li></ul><p> Made With UNREAL ENGINE 5, Where I made multiple mechanics and learned	UNREAL ENGINE 5	Workflow </p>
 							<p> My learning outcomes from this project </p>
 							<ul>
 								<li>Created Skate Mechanics for the Main character to move Quickly.</li>
@@ -113,23 +46,7 @@
 								<li>Worked on Metahuman plugin from UNREAL to create some custom enemies for the game.</li>
 								<li>Used Lumen and Nanite and did optimizations for smoother FPS.</li>
 							</ul>
-							<p>I learned a lot about the workflow of UNREAL ENGINE 5 and created this third person game demo.</p>
-						</div>
-					</div>
-
-					<hr class="major" />
-					<header class="main">
-						<h2> UNITY VFX Graphs (HDRP) (UNITY Engine C#)</h2>
-					</header>
-					<div class="two-column">
-						<span class="image main">
-							<video width="700" height="500" autoplay muted loop>
-								<source src="images/VFXgraph.mp4" type="video/mp4">
-								Your browser does not support the video tag.
-							</video>
-						</span>
-						<div class="content">
-							<p>Built With High Definition Render Pipeline (HDRP) i used Unity's Shader Graph for creating Shaders effects.</p>
+							<p>I learned a lot about the workflow of UNREAL ENGINE 5 and created this third person game demo.</p></div></article><article class="work" data-tags="unity"><div class="work-media"><div class="frame"><video data-clip muted loop playsinline preload="none" poster="images/posters/VFXgraph.jpg" aria-label="VFX Graph effects"><source src="images/VFXgraph.mp4" type="video/mp4"></video></div></div><div class="work-body"><h3>Unity VFX Graph (HDRP)</h3><ul class="tags"><li>Unity</li><li>Shader Graph</li><li>HDRP</li></ul><p>Built With High Definition Render Pipeline (HDRP) i used Unity's Shader Graph for creating Shaders effects.</p>
 							<p>I learned :</p>
 							<ul>
 								<li>How to create and use VFX graphs.</li>
@@ -137,23 +54,7 @@
 								<li>Use particle shaders.</li>
 
 							</ul>
-							<p>My Goal was to learn to create my own shaders and effects and try to replicate some VFX I see in games and applications</p>
-						</div>
-					</div>
-
-					<hr class="major" />
-					<header class="main">
-						<h2> UNITY VR (UNITY Engine C#)</h2>
-					</header>
-					<div class="two-column">
-						<span class="image main">
-							<video width="700" height="500" autoplay muted loop>
-								<source src="images/VR.mp4" type="video/mp4">
-								Your browser does not support the video tag.
-							</video>
-						</span>
-						<div class="content">
-							<p>Built With XR toolkit for unity.</p>
+							<p>My Goal was to learn to create my own shaders and effects and try to replicate some VFX I see in games and applications</p></div></article><article class="work" data-tags="unity xr"><div class="work-media"><div class="frame"><video data-clip muted loop playsinline preload="none" poster="images/posters/VR.jpg" aria-label="VR scene on Meta Quest 3"><source src="images/VR.mp4" type="video/mp4"></video></div></div><div class="work-body"><h3>Unity VR</h3><ul class="tags"><li>Unity</li><li>XR Toolkit</li><li>Meta Quest 3</li></ul><p>Built With XR toolkit for unity.</p>
 							<p>I managed to :</p>
 							<ul>
 								<li>Create VR Scene and built it on META QUEST 3 headset.</li>
@@ -162,233 +63,36 @@
 								<li>Made some effects that I learned and tried to replicate them in VR.</li>
 								<li>Create a interactive gameplay scene that can be built into a application.</li>
 							</ul>
-							<p>I wanted to learn XR toolkit and wanted to try my hands on VR Development and was successful in it</p>
-						</div>
-					</div>
-
-					<hr class="major" />
-
-
-					<header class="main">
-						<h2>My University Projects </h2>
-					</header>
-
-					<p> During my Masters in Games Programming at the University of Hull, UK, I undertook several Course Modules that greatly enriched my knowledge and skills.</p>
-					<p> All projects can be viewed in detail on thier Github Repository for further details and can be downloaded aswell to test.</p>
-
-					<hr class="major" />
-
-					<header class="main">
-						<h2> Dissertation: Behaviour trees (BT) and Finite state machines (FSM) (UNITY C#) </h2>
-					</header>
-					<div class="two-column">
-						<span class="image main">
-							<video width="700" height="500" autoplay muted loop>
-								<source src="images/Desert.mp4" type="video/mp4">
-								Your browser does not support the video tag.
-							</video>
-						</span>
-						<div class="content">
-							<p> This was my dissertation for masters in Computer Science in Games programming which objective was to explore integrating Finite State Machines (FSM) and Behaviour Trees (BTs) in game AI systems to understand AI decision-making subtleties. Traditional AI systems in video games have drawbacks, while BTs, known for their modularity and complexity representation, offer a viable alternative. The research covers the evolution of game AI from simple rule-based systems to sophisticated, learning-facilitated configurations. It includes developing an AI system for a First-Person Shooter (FPS) game, comparing FSMs and BTs, assessing AI complexity and adaptability, and evaluating player immersion. The study demonstrates that FSMs are best for linear tasks with little customization, while BTs provide a flexible, extendable AI solution. Combining FSMs with BTs and incorporating reinforcement learning into BTs is also explored. Using Unity, the dissertation visually represents AI systems by contrasting FSM and BT-based scenes, highlighting AI modularity and fluidity. The research aims to bridge the gap between simple adaptive AI and traditional game AI, offering a comprehensive framework to enhance AI adaptability in video games and real-world applications. </p>
-
-						</div>
-					</div>
-					<hr class="major" />
-
-					<header class="main">
-						<h2> C++ Rendering (DirectX 11) </h2>
-					</header>
-					<div class="two-column">
-						<span class="image main">
-							<img src="images/rock.png" alt="" style="width:700px; height:500px;" />
-						</span>
-						<div class="content">
-							<p>This was my First DirectX project, I deepened my understanding of C++ programming. My previous experience with OpenGL proved beneficial, with most challenges arising from syntax differences and the reversed Z axis. I significantly benefited from the graphics debugger in Visual Studio, which simplified the shader code debugging process. To achieve an expansive terrain, I embraced instance rendering, drawing numerous cubes in a single call, enhancing performance. I also developed various particle effects using screen-aligned quads and employed both parallax and cube mapping for richer visual effects on terrain and rocket simulations and animations, respectively. Reflecting on the project, recognizing areas for potential improvement like the particle effects and considering external configurations for simulation constants.</p>
-							<p><a href="https://github.com/j4m4lk/RocketSimulation#explosion" target="_blank"> Read More/Download</a> </p>
-
-						</div>
-					</div>
-					<hr class="major" />
+							<p>I wanted to learn XR toolkit and wanted to try my hands on VR Development and was successful in it</p></div></article></div>
+<div class="group"><h2 class="group-title">University projects</h2><p>During my Masters in Games Programming at the University of Hull, UK, I undertook several course modules that greatly enriched my knowledge and skills. Projects with a GitHub link can be downloaded and tested.</p><article class="work" data-tags="unity"><div class="work-media"><div class="frame"><video data-clip muted loop playsinline preload="none" poster="images/posters/Desert.jpg" aria-label="Dissertation AI demo"><source src="images/Desert.mp4" type="video/mp4"></video></div></div><div class="work-body"><h3>Dissertation: behaviour trees and finite state machines</h3><ul class="tags"><li>Unity</li><li>C#</li><li>Game AI</li></ul><p class="clamp"> This was my dissertation for masters in Computer Science in Games programming which objective was to explore integrating Finite State Machines (FSM) and Behaviour Trees (BTs) in game AI systems to understand AI decision-making subtleties. Traditional AI systems in video games have drawbacks, while BTs, known for their modularity and complexity representation, offer a viable alternative. The research covers the evolution of game AI from simple rule-based systems to sophisticated, learning-facilitated configurations. It includes developing an AI system for a First-Person Shooter (FPS) game, comparing FSMs and BTs, assessing AI complexity and adaptability, and evaluating player immersion. The study demonstrates that FSMs are best for linear tasks with little customization, while BTs provide a flexible, extendable AI solution. Combining FSMs with BTs and incorporating reinforcement learning into BTs is also explored. Using Unity, the dissertation visually represents AI systems by contrasting FSM and BT-based scenes, highlighting AI modularity and fluidity. The research aims to bridge the gap between simple adaptive AI and traditional game AI, offering a comprehensive framework to enhance AI adaptability in video games and real-world applications. </p></div></article><article class="work" data-tags="cpp"><div class="work-media"><a class="frame" href="images/rock.png" data-lightbox="uni" data-caption="C++ rendering in DirectX 11" style="display:block"><img src="images/thumbs/rock.jpg" alt="C++ rendering in DirectX 11" loading="lazy"></a></div><div class="work-body"><h3>C++ rendering</h3><ul class="tags"><li>C++</li><li>DirectX 11</li></ul><p>This was my First DirectX project, I deepened my understanding of C++ programming. My previous experience with OpenGL proved beneficial, with most challenges arising from syntax differences and the reversed Z axis. I significantly benefited from the graphics debugger in Visual Studio, which simplified the shader code debugging process. To achieve an expansive terrain, I embraced instance rendering, drawing numerous cubes in a single call, enhancing performance. I also developed various particle effects using screen-aligned quads and employed both parallax and cube mapping for richer visual effects on terrain and rocket simulations and animations, respectively. Reflecting on the project, recognizing areas for potential improvement like the particle effects and considering external configurations for simulation constants.</p>
+							<p><a href="https://github.com/j4m4lk/RocketSimulation#explosion" target="_blank" rel="noopener"> Read More/Download</a> </p></div></article><article class="work" data-tags="cpp"><div class="work-media"><a class="frame" href="images/canvas.png" data-lightbox="uni" data-caption="Networked 3D canvas" style="display:block"><img src="images/canvas.png" alt="Networked 3D canvas" loading="lazy"></a></div><div class="work-body"><h3>Multi-threading and networking</h3><ul class="tags"><li>C++</li><li>DirectX 11</li><li>Winsock2</li></ul><p class="clamp">Built using Directx Libraries and using Winsock2, I delved deep into threading and networking within C++, leading to the creation of a real-time 3D networked application. The foundation of this endeavor was the Rocket simulation I had previously developed, which provided an opportunity to rectify its flaws while building a comprehensive Simulation. I employed a thread pool for threading, encapsulating C++ threads within classes and managing potential thread contention using lock guards. Networking was achieved via a peer-to-peer structure using client–server system. The concept involved players drawing on a 3D canvas, with cubes signifying their mass; a player could "steal" from another's canvas, affecting both canvases' colors. In reflection, while the application showcased minimal latency and reliable data transmission even under simulated poor network conditions.</p>
+							<p><a href="https://github.com/j4m4lk/CanvasGame" target="_blank" rel="noopener"> Read More/Download </a> </p></div></article><article class="work" data-tags="cpp"><div class="work-media"><a class="frame" href="images/underwater.png" data-lightbox="uni" data-caption="Underwater scene in DirectX 11" style="display:block"><img src="images/thumbs/underwater.jpg" alt="Underwater scene in DirectX 11" loading="lazy"></a></div><div class="work-body"><h3>C++ advanced rendering</h3><ul class="tags"><li>C++</li><li>DirectX 11</li></ul><p>Developed with the DirectX libraries, in the geometry shader, I generate the terrain using a noise function to adjust its height and create an underwater texture. By examining the gradient of each point with its neighboring noise values, I generate normals, which let me apply basic Phong shading. I also pass a set of control points into the shader to produce plants at each position. I manipulate their vertices over time to simulate the swaying effect of a breeze and employ alpha blending for transparent backgrounds. Additionally, I craft implicit shapes using ray marching tied to distance functions and encase these shapes in a bounding box, optimizing the ray marching process and reducing the necessary steps to reach each shape.</p></div></article><article class="work" data-tags="cpp"><div class="work-media"><a class="frame" href="images/AISIM.png" data-lightbox="uni" data-caption="Tower defense simulation" style="display:block"><img src="images/AISIM.png" alt="Tower defense simulation" loading="lazy"></a></div><div class="work-body"><h3>C++ tower defense</h3><ul class="tags"><li>C++</li><li>OpenGL</li><li>AI</li></ul><p>I developed a tower defense simulation using OpenGL to demonstrate my expertise in AI. I designed a collision system to identify interactions between agents, towers, and their projectiles. I utilized both the Runge-Kutta and Euler methods for ball-ground collisions, giving the balls random movement patterns. Additionally, I incorporated spatial segmentation for the terrain.</p></div></article><article class="work" data-tags="unity xr"><div class="work-media"><a class="frame" href="images/VR.png" data-lightbox="uni" data-caption="Surgical simulation in Unity" style="display:block"><img src="images/thumbs/VR.jpg" alt="Surgical simulation in Unity" loading="lazy"></a></div><div class="work-body"><h3>Mixed-reality surgical simulation</h3><ul class="tags"><li>Unity</li><li>C#</li><li>HoloLens</li><li>MRTK</li></ul><p>I developed a surgical simulation in the Unity engine, leveraging HoloLens libraries to provide a comprehensive AR experience. The project incorporated core mixed reality features such as the Mixed Reality Toolkit (MRTK), Positioning, Interaction, Eye tracking, and Voice commands. I utilized these AR capabilities to simulate airway insertion, enabling users to manipulate a controller to insert a cable into an airway, and providing a visual from a camera positioned at the cable's tip to view the interior of the airway. Furthermore, the simulation integrated Azure functionalities, specifically Spatial Anchors and Holographic Remoting.</p></div></article><article class="work" data-tags="unreal cpp"><div class="work-media"><a class="frame" href="images/unreal.png" data-lightbox="uni" data-caption="Group project in the Unreal editor" style="display:block"><img src="images/thumbs/unreal.jpg" alt="Group project in the Unreal editor" loading="lazy"></a></div><div class="work-body"><h3>Group project</h3><ul class="tags"><li>Unreal Engine 5</li><li>C++</li><li>Team lead</li></ul><p>In this project, using Unreal Engine 5, I not only familiarized myself with GitHub's code management and source control but also deepened my understanding of Unreal Engine. As the team project lead, I utilized GitHub boards to delegate tasks to team members and myself, diligently ensuring each task was completed within its set deadline before moving on to the next.</p></div></article></div>
+<div class="group"><h2 class="group-title">Game jams</h2><p>Game jams I took part in.</p><article class="work" data-tags="unity"><div class="work-media"><a class="frame" href="images/gamejam1.jpg" data-lightbox="uni" data-caption="Santa Slider" style="display:block"><img src="images/gamejam1.jpg" alt="Santa Slider" loading="lazy"></a></div><div class="work-body"><h3>Three Thing Game, University of Hull: Santa Slider</h3><ul class="tags"><li>Unity</li><li>C#</li><li>3rd place</li></ul><p>This was a concept game called Santa Slider that i made with a group of my collegues based on 3 random word we were assigned in the ThreeThing GameJam, we made this in unity using basic programming and basic free assests from the unity store. We got 3rd place overall and it was my first GameJam participation.</p>
 
 
-
-					<header class="main">
-						<h2>Multi-Threading and Networking (C++) (DirectX 11 and Websock2)  </h2>
-					</header>
-					<div class="two-column">
-						<span class="image main">
-							<img src="images/canvas.png" alt="" style="width:700px; height:500px;" />
-						</span>
-						<div class="content">
-							<p>Built using Directx Libraries and using websock2, I delved deep into threading and networking within C++, leading to the creation of a real-time 3D networked application. The foundation of this endeavor was the Rocket simulation I had previously developed, which provided an opportunity to rectify its flaws while building a comprehensive Simulation. I employed a thread pool for threading, encapsulating C++ threads within classes and managing potential thread contention using lock guards. Networking was achieved via a peer-to-peer structure using client–server system. The concept involved players drawing on a 3D canvas, with cubes signifying their mass; a player could "steal" from another's canvas, affecting both canvases' colors. In reflection, while the application showcased minimal latency and reliable data transmission even under simulated poor network conditions.</p>
-							<p><a href="https://github.com/j4m4lk/CanvasGame" target="_blank"> Read More/Download </a> </p>
-
-						</div>
-					</div>
-
-					<hr class="major" />
-
-
-					<header class="main">
-						<h2>C++ Advanced Rendering (DirectX 11)</h2>
-					</header>
-					<div class="two-column">
-						<span class="image main">
-							<img src="images/underwater.png" alt="" style="width:700px; height:500px;" />
-						</span>
-						<div class="content">
-							<p>Developed with the DirectX libraries, in the geometry shader, I generate the terrain using a noise function to adjust its height and create an underwater texture. By examining the gradient of each point with its neighboring noise values, I generate normals, which let me apply basic Phong shading. I also pass a set of control points into the shader to produce plants at each position. I manipulate their vertices over time to simulate the swaying effect of a breeze and employ alpha blending for transparent backgrounds. Additionally, I craft implicit shapes using ray marching tied to distance functions and encase these shapes in a bounding box, optimizing the ray marching process and reducing the necessary steps to reach each shape.</p>
-						</div>
-					</div>
-
-
-
-
-
-
-					<hr class="major" />
-
-					<header class="main">
-						<h2> C++ Tower Defense (OpenGL)</h2>
-					</header>
-					<div class="two-column">
-						<span class="image main">
-							<img src="images/AISIM.png" alt="" style="width:700px; height:500px;" />
-						</span>
-						<div class="content">
-							<p>I developed a tower defense simulation using OpenGL to demonstrate my expertise in AI. I designed a collision system to identify interactions between agents, towers, and their projectiles. I utilized both the Runge-Kutta and Euler methods for ball-ground collisions, giving the balls random movement patterns. Additionally, I incorporated spatial segmentation for the terrain.</p>
-						</div>
-					</div>
-
-
-
-
-					<hr class="major" />
-
-
-					<header class="main">
-						<h2>Unity VR Project (UNITY Engine C#) </h2>
-					</header>
-					<div class="two-column">
-						<span class="image main">
-							<img src="images/VR.png" alt="" style="width:700px; height:500px;" />
-						</span>
-						<div class="content">
-							<p>I developed a surgical simulation in the Unity engine, leveraging HoloLens libraries to provide a comprehensive AR experience. The project incorporated core mixed reality features such as the Mixed Reality Toolkit (MRTK), Positioning, Interaction, Eye tracking, and Voice commands. I utilized these AR capabilities to simulate airway insertion, enabling users to manipulate a controller to insert a cable into an airway, and providing a visual from a camera positioned at the cable's tip to view the interior of the airway. Furthermore, the simulation integrated Azure functionalities, specifically Spatial Anchors and Holographic Remoting.</p>
-						</div>
-					</div>
-
-
-
-					<hr class="major" />
-
-					<header class="main">
-						<h2> Group Project (UNREAL Engine 5 C++) </h2>
-					</header>
-					<div class="two-column">
-						<span class="image main">
-							<img src="images/unreal.png" alt="" style="width:700px; height:500px;" />
-						</span>
-						<div class="content">
-							<p>In this project, using Unreal Engine 5, I not only familiarized myself with GitHub's code management and source control but also deepened my understanding of Unreal Engine. As the team project lead, I utilized GitHub boards to delegate tasks to team members and myself, diligently ensuring each task was completed within its set deadline before moving on to the next.</p>
-						</div>
-					</div>
-
-
-
-
-				</section>
-
-
-				<hr class="major" />
-
-				<header class="main">
-					<h2>GameJAMs </h2>
-				</header>
-
-				<p> Some GameJams i took part in.</p>
-
-
-				<hr class="major" />
-
-				<header class="main">
-					<h2> Three thing game (University of HULL,UK) (UNITY Engine C#) </h2>
-				</header>
-				<div class="two-column">
-					<span class="image main">
-						<img src="images/gamejam1.jpg" alt="" style="width:700px; height:500px;" />
-					</span>
-					<div class="content">
-						
-						<p>This was a concept game called Santa Slider that i made with a group of my collegues based on 3 random word we were assigned in the ThreeThing GameJam, we made this in unity using basic programming and basic free assests from the unity store. We got 3rd place overall and it was my first GameJam participation.</p>
-
-
-						<p><a href="https://itch.io/jam/three-thing-game-november-2022/rate/1809958" target="_blank">GameJam Link</a> </p>
-
-					</div>
-				</div>
-
-				
-				</div>
-			</div>
-
-			
-			<div id="sidebar">
-				<div class="inner">
-
-
-					<nav id="menu">
-						<header class="major">
-							<h2>Menu</h2>
-						</header>
-						<ul>
-							<li><a href="index.html">Introduction</a></li>
-							<li>
-								<a href="project-kickflipper.html">
-									Project Kickflipper <span style="color:#000; font-size: 0.8em;">(Ongoing) Unity Engine C#</span>
-								</a>
-							</li>
-							<li>
-								<a href="Lunaris.html">
-									Project Lunaris<br>
-									<span style="color:#000; font-size:0.8em;">(Ongoing) Unreal Engine 5.6 C++</span>
-								</a>
-							</li>
-
-							<li><a href="generic.html">Professional Projects</a></li>
-							<li><a href="elements.html">University/Side Projects</a></li>
-						</ul>
-					</nav>
-
-
-					<!--<section>
-						<header class="major">
-							<h2>Get in touch</h2>
-						</header>
-						<p> </p>
-						<ul class="contact">
-							<li class="icon solid fa-envelope"><a href="#">jamal.kundi@gmail.com</a></li>
-							<li class="icon solid fa-phone">+(44) 7448499436</li>
-							<li class="icon solid fa-home">Belfast, Northern Ireland, United Kingdom.</li>
-						</ul>
-					</section>-->
-
-					<!-- Footer -->
-					<footer id="footer">
-						<p class="copyright">&copy; Jamal. All rights reserved.</p>
-					</footer>
-
-				</div>
-			</div>
-
+						<p><a href="https://itch.io/jam/three-thing-game-november-2022/rate/1809958" target="_blank" rel="noopener">GameJam Link</a> </p></div></article></div>
+</div>
+<section class="section" id="contact">
+	<div class="wrap">
+		<h2>Get in touch</h2>
+		<p class="muted">Questions, suggestions or a role you think fits? Email is the fastest way to reach me.</p>
+		<p class="contact-email">jamal.kundi@gmail.com</p>
+		<div class="actions">
+			<a class="btn" href="mailto:jamal.kundi@gmail.com">Send an email</a>
+			<button class="btn ghost" type="button" data-copy="jamal.kundi@gmail.com">Copy address</button>
+			<a class="btn ghost" href="https://github.com/j4m4lk" target="_blank" rel="noopener">GitHub</a>
 		</div>
-
-		<!-- Scripts -->
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/browser.min.js"></script>
-		<script src="assets/js/breakpoints.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script>
-
+	</div>
+</section>
+</main>
+<footer class="footer">
+	<div class="wrap">
+		<p>&copy; Jamal Kundi</p>
+		<p class="credit">Unity, Steam, Android, Google Play and GitHub icons from <a href="https://fontawesome.com" target="_blank" rel="noopener">Font Awesome</a> (CC BY 4.0). Other logos belong to their owners.</p>
+		<p><a href="index.html">Back to all projects</a></p>
+	</div>
+</footer>
+<div class="toast" role="status" aria-live="polite"></div>
+<script src="assets/js/site.js"></script>
 </body>
 </html>

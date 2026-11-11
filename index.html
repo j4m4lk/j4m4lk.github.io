@@ -1,346 +1,116 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>Jamal Kundi - Game Developer and Programmer - Portfolio</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
-
-	<!-- Page-local styles for full-page GIF background (under #main only) -->
-	<style>
-		/* Reusable dark translucent card for banner content + image */
-		#banner .overlay-card {
-			background: rgba(0,0,0,0.55);
-			border: 1px solid rgba(255,255,255,0.06);
-			border-radius: 12px;
-			padding: 16px 18px;
-			backdrop-filter: blur(2px);
-			box-shadow: 0 8px 24px rgba(0,0,0,.35);
-		}
-			/* Ensure readable text on the dark card */
-			#banner .overlay-card,
-			#banner .overlay-card h1,
-			#banner .overlay-card h2,
-			#banner .overlay-card p,
-			#banner .overlay-card .actions a,
-			#banner .overlay-card .actions .button {
-				color: #fff !important;
-			}
-		/* Tweak the image card */
-		#banner .image.overlay-card {
-			display: inline-block;
-			padding: 10px;
-		}
-
-			#banner .image.overlay-card img {
-				display: block;
-				border-radius: 10px;
-				max-width: 100%;
-				height: auto;
-			}
-
-		:root {
-			--sidebar-width: 22rem; /* adjust if your theme differs */
-			--sidebar-gap: 2rem;
-		}
-		/* Fixed background layer (MAIN AREA ONLY) */
-		.site-bg.site-bg--main {
-			position: fixed;
-			top: 0;
-			bottom: 0;
-			left: calc(var(--sidebar-width) + var(--sidebar-gap));
-			right: 0;
-			z-index: 0;
-			pointer-events: none;
-		}
-
-			.site-bg.site-bg--main > img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-				display: block;
-			}
-
-		.site-bg-dim {
-			position: absolute;
-			inset: 0;
-			background: rgba(0,0,0,0.5);
-		}
-
-		#wrapper {
-			position: relative;
-			z-index: 1;
-		}
-
-		@media (max-width: 980px) {
-			.site-bg.site-bg--main {
-				left: 0;
-			}
-		}
-
-		@media (prefers-reduced-motion: reduce) {
-			.site-bg {
-				display: none;
-			}
-		}
-
-		/* Visit counter badges */
-		.visit-row {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 8px;
-			align-items: center;
-			margin-top: 6px;
-		}
-
-		.visit-badge {
-			display: inline-flex;
-			align-items: center;
-			gap: 6px;
-			background: rgba(0,0,0,.6);
-			color: #fff;
-			border: 1px solid rgba(255,255,255,.08);
-			padding: 6px 10px;
-			border-radius: 10px;
-			font-size: .9rem;
-		}
-
-			.visit-badge .dot {
-				width: 8px;
-				height: 8px;
-				border-radius: 50%;
-				display: inline-block;
-				background: #00ffd5;
-			}
-
-        #footer {
-            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
-            position: fixed;
-            bottom: 20px;
-            left: 80px;
-            z-index: 999;
-            /* remove box look */
-            background: none;
-            padding: 0;
-            border: none;
-            box-shadow: none;
-            backdrop-filter: none;
-        }
-
-            /* keep text readable */
-            #footer,
-            #footer p,
-            #footer span {
-                color: #fff;
-                font-size: 0.85rem;
-            }
-
-        /* tidy layout */
-        .visit-row {
-            margin-top: 4px;
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        /* optional: subtle dot */
-        .visit-badge .dot {
-            display: inline-block;
-            width: 5px;
-            height: 5px;
-            background: #00ff00;
-            border-radius: 50%;
-            margin-right: 5px;
-        }
-
-
-	</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jamal Kundi, Senior Game Developer (Unity and Unreal Engine 5)</title>
+<meta name="description" content="Senior game developer with 7+ years in Unity and Unreal Engine 5. Rook's Quest, Kreed Digital Studio, shipped games and university projects.">
+<meta property="og:title" content="Jamal Kundi, Senior Game Developer (Unity and Unreal Engine 5)">
+<meta property="og:description" content="Senior game developer with 7+ years in Unity and Unreal Engine 5. Rook's Quest, Kreed Digital Studio, shipped games and university projects.">
+<meta property="og:image" content="https://j4m4lk.github.io/images/thumbs/kickflipper-hero.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Rubik:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
 </head>
-
-<script>
-	function copyEmail() {
-		const email = "jamal.kundi@gmail.com";
-
-		navigator.clipboard.writeText(email).then(() => {
-			const feedback = document.getElementById("copy-feedback");
-			feedback.style.display = "block";
-
-			setTimeout(() => {
-				feedback.style.display = "none";
-			}, 2000);
-		});
-	}
-</script>
-
-
-
-<body class="is-preload">
-
-	<!-- Fixed GIF background under the MAIN content only -->
-	<div class="site-bg site-bg--main" aria-hidden="true">
-		<img src="BG/BGgiff.gif" alt="Background montage" />
-		<div class="site-bg-dim"></div>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+	<div class="wrap nav-row">
+		<a class="brand" href="index.html">Jamal Kundi</a>
+		<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+		<ul class="nav-links" id="nav-links"><li><a href="rooks-quest.html">Rook's Quest</a></li><li><a href="unreal.html">Unreal Engine 5</a></li><li><a href="generic.html">Shipped games</a></li><li><a href="elements.html">University</a></li><li><a href="index.html#studio">Studio</a></li><li><a href="index.html#contact">Contact</a></li></ul>
 	</div>
-
-	<!-- Wrapper -->
-	<div id="wrapper">
-
-		<!-- Main -->
-		<div id="main">
-			<div class="inner">
-
-				<!-- Header -->
-				<header id="header">
-					<a href="index.html" class="logo"><strong>Portfolio</strong> by Jamal</a>
-				</header>
-
-				<!-- Banner -->
-				<section id="banner">
-					<div class="content overlay-card">
-						<header>
-							<h1>Hi, I’m Jamal Kundi</h1>
-							<p>Game Developer and Programmer</p>
-						</header>
-						<p>
-							I have over 5 years of experience in the industry and a Master’s degree in Games Programming from the University of Hull, UK.
-							My academic background gave me a strong foundation in systems like DirectX and OpenGL, while my professional journey has allowed
-							me to develop expertise across both Unreal Engine and Unity. I'm passionate about creating high-performance, innovative games
-							and take pride in being a versatile developer who adapts well to diverse development challenges.
-						</p>
-
-						<ul class="actions">
-							<li>
-								<a href="project-kickflipper.html" class="button primary">
-									📱 Check out my personal Android project: Project KickFlipper
-								</a>
-							</li>
-						</ul>
-
-						<ul class="actions">
-
-							<div style="margin-top: 20px;">
-								<p style="color:#00ffd5; font-size:1.05rem; font-weight:600; margin-bottom:12px; text-align:center;">
-									Get in touch with me
-								</p>
-
-								<ul class="actions">
-									<li>
-										<span style="color:#fff; font-weight:600;">
-											📧 jamal.kundi@gmail.com
-										</span>
-									</li>
-
-									<li>
-										<button onclick="copyEmail()" class="button">
-											📋 Copy Email
-										</button>
-									</li>
-
-									<li>
-										<a href="mailto:jamal.kundi@gmail.com" class="button primary">
-											✉️ Send Email
-										</a>
-									</li>
-								</ul>
-							</div>
-
-						<!-- Small feedback text -->
-						<p id="copy-feedback" style="color:#00ff00; display:none; margin-top:10px;">
-							Email copied to clipboard!
-						</p>
-
-					</div>
-
-					<span class="image object overlay-card">
-						<img src="images/propic.png" alt="Jamal profile" />
-					</span>
-				</section>
-
+	<div class="band" aria-hidden="true"></div>
+</header>
+<main id="main">
+<section class="scene" aria-label="Projects">
+	<div class="sky">
+		<div class="wrap">
+			<h1>Jamal Kundi</h1>
+			<p class="role">Senior Game Developer</p>
+			<p class="lead">I build and ship games in Unity and Unreal Engine 5. Walk down the street to see the work.</p>
+		</div>
+	</div>
+	<div class="street">
+		<div class="street-track">
+			<ul class="buildings"><li><a class="building" href="rooks-quest.html" style="--c:var(--night);--w:310px;--h:400px;--art:175px" draggable="false"><span class="sign">Rook's Quest</span><img class="b-art" src="https://kreedthestudio.com/rooksquest/assets/img/og-image.jpg" alt="" draggable="false" style="view-transition-name:rq-art"><span class="b-text">A blitz chess roguelite set in Karachi. Made in Unity, coming to Steam.</span><span class="door">Go inside</span></a></li><li><a class="building" href="unreal.html" style="--c:var(--teal);--w:280px;--h:470px;--art:140px" draggable="false"><span class="sign">Unreal Engine 5</span><img class="b-art" src="images/posters/Globe.jpg" alt="" draggable="false" style="view-transition-name:ue-art"><span class="b-text">The Globe project, Project Lunaris systems and my other C++ and Blueprints work.</span><span class="door">Go inside</span></a></li><li><a class="building" href="generic.html" style="--c:var(--blue);--w:250px;--h:340px;--art:110px" draggable="false"><span class="sign">Shipped games</span><img class="b-art" src="images/posters/BBG.jpg" alt="" draggable="false"><span class="b-text">Six released titles on Google Play and Steam.</span><span class="door">Go inside</span></a></li><li><a class="building" href="#studio" style="--c:var(--green);--w:290px;--h:420px;--art:160px" draggable="false"><span class="sign">Kreed Digital Studio</span><span class="b-text">My independent two-person studio, making Rook&#39;s Quest for Steam.</span><span class="door">Go inside</span></a></li><li><a class="building" href="elements.html" style="--c:#12355e;--w:250px;--h:310px;--art:100px" draggable="false"><span class="sign">University</span><img class="b-art" src="images/thumbs/underwater.jpg" alt="" draggable="false"><span class="b-text">Rendering, AI, VR and networking from my MSc and side projects.</span><span class="door">Go inside</span></a></li></ul>
+		</div>
+		<div class="road">
+			<div class="wrap road-row">
+				<p>Drag or scroll sideways to walk the street</p>
+				<div class="street-btns">
+					<button class="street-prev" type="button" aria-label="Walk left">&#9664;</button>
+					<button class="street-next" type="button" aria-label="Walk right">&#9654;</button>
+				</div>
 			</div>
 		</div>
+	</div>
+</section>
 
-		<!-- Sidebar -->
-		<div id="sidebar">
-			<div class="inner">
+<section class="section" id="about">
+	<div class="wrap about">
+		<img src="images/propic.png" alt="Jamal Kundi" width="240" height="240">
+		<div>
+			<h2>About me</h2>
+			<p class="lead" style="margin-top:1.25rem">Senior Game Developer with 7+ years of experience building and shipping games in Unity and Unreal Engine 5.</p>
+			<p>Strong in C# and C++, specialising in gameplay programming, scalable architecture, multiplayer replication, and data-driven world building, including real-world city generation from CSV data. Skilled in performance optimisation across CPU, memory, GC, and draw calls, and in building custom editor and pipeline tools. Experienced in taking games from prototype to launch. Uses AI-assisted workflows for faster coding, testing, and profiling, cutting development and debugging time by half.</p>
+			<p>I also build my own AI-assisted tools, such as a Unity level design tool that reuses texture atlases, shows draw calls as you build, and snaps and duplicates objects to keep draw calls down. These days I'm modelling assets in Blender for my own game and bringing them into Unity through a Blender-to-Unity pipeline.</p>
+			<dl class="facts">
+				<div><dt>Experience</dt><dd>7+ years</dd></div>
+				<div><dt>Engines</dt><dd>Unity, Unreal Engine 5</dd></div>
+				<div><dt>Languages</dt><dd>C#, C++</dd></div>
+				<div><dt>Specialities</dt><dd>Gameplay, multiplayer, optimisation</dd></div>
+				<div><dt>Education</dt><dd>MSc Games Programming, University of Hull</dd></div>
+			</dl>
+		</div>
+	</div>
+</section>
 
-				<nav id="menu">
-					<header class="major">
-						<h2>Menu</h2>
-					</header>
-					<ul>
-						<li><a href="index.html">Introduction</a></li>
-						<li>
-							<a href="project-kickflipper.html">
-								Project Kickflipper <span style="color:#000; font-size: 0.8em;">(Ongoing) Unity Engine C#</span>
-							</a>
-						</li>
-						<li>
-							<a href="Lunaris.html">
-								Project Lunaris<br>
-								<span style="color:#000; font-size:0.8em;">(Ongoing) Unreal Engine 5.6 C++</span>
-							</a>
-						</li>
-						<li><a href="generic.html">Professional Projects</a></li>
-						<li><a href="elements.html">University/Side Projects</a></li>
-					</ul>
-				</nav>
-
-				<!--<section>
-					<header class="major">
-						<h2>Get in touch</h2>
-					</header>
-					<ul class="contact">
-						<li class="icon solid fa-envelope"><a href="mailto:jamal.kundi@gmail.com">jamal.kundi@gmail.com</a></li>
-						<li class="icon solid fa-phone">+(44) 7448499436</li>
-						<li class="icon solid fa-home">Belfast, Northern Ireland, United Kingdom.</li>
-					</ul>
-				</section>-->
-
-				<!-- Footer -->
-				<footer id="footer">
-					<p class="copyright">&copy; Jamal. All rights reserved.</p>
-					<div class="visit-row">
-						<span class="visit-badge"><span class="dot"></span> Visits: <span id="visit-count">…</span></span>
-						<span class="visit-badge"><span class="dot"></span> Unique visitors: <span id="unique-count">…</span></span>
-					</div>
-				</footer>
-
+<section class="section" id="studio">
+	<div class="wrap studio">
+		<div>
+			<h2>Kreed Digital Studio</h2>
+			<p class="lead" style="margin-top:1.25rem">An independent two-person game studio.</p>
+			<p>Kreed began in Islamabad, where Burhan Ahmad and I met, and now works between the UK and Dubai. I'm the game developer and programmer; Burhan is a game and XR developer.</p>
+			<p>Our first game is Rook's Quest, a blitz chess roguelite set in Karachi, made in Unity and coming to Steam. I model its assets in Blender and use AI-assisted tools to speed up coding, testing and profiling.</p>
+			<div class="actions">
+				<a class="btn" href="https://kreedthestudio.com/" target="_blank" rel="noopener">Visit kreedthestudio.com</a>
+				<a class="btn ghost" href="rooks-quest.html">See Rook's Quest</a>
 			</div>
 		</div>
-
+		<a class="studio-art" href="rooks-quest.html" aria-label="Rook's Quest"><img src="https://kreedthestudio.com/rooksquest/assets/shots/k-saddar-960.webp" alt="Rook's Quest: Saddar, Karachi" loading="lazy"></a>
 	</div>
+</section>
 
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
-
-	<!-- Persistent visit + unique counters via Cloudflare Worker -->
-	<script>
-		(function () {
-			// TODO: replace with YOUR deployed Worker URL:
-			// e.g. 'https://jk-counter.YOURHANDLE.workers.dev/?key=index'
-            const ENDPOINT = 'https://jk-counter.jamalkundi.workers.dev/';
-
-			fetch(ENDPOINT, { credentials: 'include' }) // include cookie for unique tracking
-				.then(r => r.json())
-				.then(data => {
-					const v = document.getElementById('visit-count');
-					const u = document.getElementById('unique-count');
-					if (v && typeof data.total === 'number') v.textContent = data.total.toLocaleString();
-					if (u && typeof data.unique === 'number') u.textContent = data.unique.toLocaleString();
-				})
-				.catch(err => {
-					console.warn('Counter error:', err);
-					const v = document.getElementById('visit-count');
-					const u = document.getElementById('unique-count');
-					if (v) v.textContent = '—';
-					if (u) u.textContent = '—';
-				});
-		})();
-	</script>
-
+<section class="section" id="tools">
+	<div class="wrap">
+		<h2>Tools I use</h2>
+		<p class="section-intro">The engines, languages and AI tools behind my work. Keep an eye out: they turn up around the site too.</p>
+		<ul class="toolbox"><li><span class="tool-disc"><img src="images/tools/unity.svg" alt="" data-short="Unity"></span>Unity</li><li><span class="tool-disc"><img src="images/tools/unreal-engine.svg" alt="" data-short="UE5"></span>Unreal Engine</li><li><span class="tool-disc"><img src="images/tools/blender.svg" alt="" data-short="Blender"></span>Blender</li><li><span class="tool-disc"><b>C#</b></span>C#</li><li><span class="tool-disc"><b>C++</b></span>C++</li><li><span class="tool-disc"><img src="images/tools/claude.svg" alt="" data-short="Claude"></span>Claude</li><li><span class="tool-disc"><img src="images/tools/chatgpt.svg" alt="" data-short="GPT"></span>ChatGPT</li><li><span class="tool-disc"><img src="images/tools/steam.svg" alt="" data-short="Steam"></span>Steam</li><li><span class="tool-disc"><img src="images/tools/android.svg" alt="" data-short="Android"></span>Android</li><li><span class="tool-disc"><img src="images/tools/google-play.svg" alt="" data-short="Play"></span>Google Play</li><li><span class="tool-disc"><img src="images/tools/github.svg" alt="" data-short="GitHub"></span>GitHub</li></ul>
+	</div>
+</section>
+<section class="section" id="contact">
+	<div class="wrap">
+		<h2>Get in touch</h2>
+		<p class="muted">Questions, suggestions or a role you think fits? Email is the fastest way to reach me.</p>
+		<p class="contact-email">jamal.kundi@gmail.com</p>
+		<div class="actions">
+			<a class="btn" href="mailto:jamal.kundi@gmail.com">Send an email</a>
+			<button class="btn ghost" type="button" data-copy="jamal.kundi@gmail.com">Copy address</button>
+			<a class="btn ghost" href="https://github.com/j4m4lk" target="_blank" rel="noopener">GitHub</a>
+		</div>
+	</div>
+</section>
+</main>
+<footer class="footer">
+	<div class="wrap">
+		<p>&copy; Jamal Kundi</p>
+		<p class="credit">Unity, Steam, Android, Google Play and GitHub icons from <a href="https://fontawesome.com" target="_blank" rel="noopener">Font Awesome</a> (CC BY 4.0). Other logos belong to their owners.</p>
+		<p>Visits: <span id="visit-count">…</span> &nbsp; Unique visitors: <span id="unique-count">…</span></p>
+	</div>
+</footer>
+<div class="toast" role="status" aria-live="polite"></div>
+<script src="assets/js/site.js"></script>
 </body>
 </html>
