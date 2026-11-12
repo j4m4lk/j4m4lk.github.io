@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Unreal Engine 5 showcase, Jamal Kundi</title>
-<meta name="description" content="Showcase videos and C++ from my Unreal Engine 5 work: the Globe project, Project Lunaris systems and more.">
+<meta name="description" content="Showcase videos and C++ from my Unreal Engine 5 work: the Globe project, C++ gameplay systems and more.">
 <meta property="og:title" content="Unreal Engine 5 showcase, Jamal Kundi">
-<meta property="og:description" content="Showcase videos and C++ from my Unreal Engine 5 work: the Globe project, Project Lunaris systems and more.">
+<meta property="og:description" content="Showcase videos and C++ from my Unreal Engine 5 work: the Globe project, C++ gameplay systems and more.">
 <meta property="og:image" content="https://j4m4lk.github.io/images/posters/Globe.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,13 +25,13 @@
 </header>
 <main id="main">
 <div class="page-hero has-video" style="view-transition-name:ue-art">
-	<video class="hero-video" autoplay muted loop playsinline preload="auto" poster="images/posters/Globe.jpg" aria-hidden="true"><source src="images/Lunaris/Globe.mp4" type="video/mp4"></video>
+	<video class="hero-video" autoplay muted loop playsinline preload="auto" poster="images/posters/Globe.jpg" aria-hidden="true"><source src="images/unreal/globe.mp4" type="video/mp4"></video>
 	<div class="wrap">
 		<h1>Unreal Engine 5 showcase</h1>
 		<p class="lead">Showcase videos and C++ from my Unreal Engine 5 work, in C++ and Blueprints.</p>
 		<ul class="jump">
 			<li><a href="#globe">Globe project</a></li>
-			<li><a href="#lunaris">Project Lunaris</a></li>
+			<li><a href="#systems">Gameplay systems</a></li>
 			<li><a href="#third-person">Third-person demo</a></li>
 			<li><a href="#group">Group project</a></li>
 		</ul>
@@ -44,23 +44,16 @@
 		<p class="section-intro">An interactive globe built in Unreal Engine 5. Holographic panels show figures for each country (sample data in this build), light rings orbit the planet, and the scene is shown here under several environments and lighting setups.</p>
 		<!-- TO ADD ANOTHER VIDEO: copy this figure, change the src, poster and caption. -->
 		<figure>
-			<div class="frame wide-video"><video controls preload="none" playsinline poster="images/posters/Globe.jpg"><source src="images/Lunaris/Globe.mp4" type="video/mp4"></video></div>
+			<div class="frame wide-video"><video controls preload="none" playsinline poster="images/posters/Globe.jpg"><source src="images/unreal/globe.mp4" type="video/mp4"></video></div>
 			<figcaption>Globe project in Unreal Engine 5 (1 min 24 s)</figcaption>
 		</figure>
 	</div>
 </section>
 
-<section class="section" id="lunaris">
+<section class="section" id="systems">
 	<div class="wrap">
-		<h2>Project Lunaris</h2>
-		<p class="lead">A survival RPG inspired by Rust and Valheim, in development at Segritude.</p>
-		<p>I'm working as C++ programmer on an Unreal Engine 5 survival RPG inspired by Rust and Valheim. I work across UE5 C++ and Blueprints, owning multiplayer/replication and core gameplay systems (AI, party system, world map and waypoints/compass, interaction, and UI/UX). My focus is a modular, data-driven architecture with safe pointers (TObjectPtr/TWeakObjectPtr), const-correctness, and early-out guards, plus ongoing profiling and optimizations to keep gameplay smooth and the codebase scalable.</p>
-		<dl class="status" style="margin-bottom:2.5rem">
-			<div><dt>Status</dt><dd>In development</dd></div>
-			<div><dt>Engine</dt><dd>Unreal Engine 5.6, C++ and Blueprints</dd></div>
-			<div><dt>Platform</dt><dd>PC</dd></div>
-			<div><dt>Studio</dt><dd><a href="https://www.segritude.com/" target="_blank" rel="noopener">Segritude LTD</a></dd></div>
-		</dl>
+		<h2>Gameplay systems in C++</h2>
+		<p class="section-intro">Systems I've built in Unreal Engine 5 C++ and Blueprints for a multiplayer game: server-authoritative AI and a modular map and waypoint system. My focus is a modular, data-driven architecture with safe pointers (TObjectPtr/TWeakObjectPtr), const-correctness and early-out guards, plus ongoing profiling to keep gameplay smooth and the codebase scalable.</p>
 
 		<article class="study">
 			<header>
@@ -68,7 +61,7 @@
 				<p>This AI chicken uses Unreal Engine 5's StateTree to drive clean, data-driven behavior switching (idle, wander, flee, death) while remaining fully server-authoritative and multiplayer-safe. The character owns its health and leash data, while the StateTree reacts purely to replicated state and gameplay events.</p>
 			</header>
 			<figure class="study-media">
-				<a class="frame contain" href="images/Lunaris/AI.png" data-lightbox="ai" data-caption="StateTree overview" style="display:block;max-width:720px"><img src="images/Lunaris/AI.png" alt="Chicken AI StateTree behaviour diagram" width="706" height="406" loading="lazy"></a>
+				<a class="frame contain" href="images/unreal/statetree-ai.png" data-lightbox="ai" data-caption="StateTree overview" style="display:block;max-width:720px"><img src="images/unreal/statetree-ai.png" alt="Chicken AI StateTree behaviour diagram" width="706" height="406" loading="lazy"></a>
 				<figcaption>StateTree overview: graze or patrol, run, look for player, return home</figcaption>
 			</figure>
 			<div class="notes"><strong>Key design points:</strong>
