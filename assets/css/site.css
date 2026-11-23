@@ -162,6 +162,10 @@ code { font-family: var(--mono); font-size: 0.88em; }
 .frame { border-radius: 8px; overflow: hidden; background: #000; border: 1px solid var(--line); }
 .frame video, .frame img, .frame iframe { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border: 0; }
 .frame.contain img { object-fit: contain; aspect-ratio: auto; height: auto; background: var(--panel); }
+.shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 0.5rem; }
+.shots a { display: block; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); }
+.shots img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; transition: transform 0.4s ease; }
+.shots a:hover img { transform: scale(1.06); }
 figure { margin: 0; }
 figcaption { font-size: 0.95rem; color: var(--muted); padding-top: 0.5rem; }
 .trailers { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); }
